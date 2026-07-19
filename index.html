@@ -3,19 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jasper Anttila | Ansioluettelo</title>
+  <title>Jasper Anttila | Premium Resume</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f7f5f1;
-      --panel:#ffffffcc;
-      --line:#1f1f1f;
-      --text:#232323;
-      --muted:#77716a;
-      --accent:#101010;
-      --shadow:0 24px 80px rgba(31,31,31,.10);
+      --bg:#fafaf8;
+      --panel:#ffffff;
+      --accent:#1a1a1a;
+      --gold:#c9a961;
+      --text:#2a2a2a;
+      --muted:#6b6b6b;
+      --border:#e8e8e5;
+      --shadow:0 8px 32px rgba(0,0,0,.08);
+      --shadow-lg:0 20px 60px rgba(0,0,0,.12);
     }
 
     *{box-sizing:border-box}
@@ -23,243 +25,311 @@
     body{
       margin:0;
       font-family:Inter,system-ui,sans-serif;
-      background:radial-gradient(circle at top,#fff 0,#f7f5f1 48%,#f1ece4 100%);
+      background:linear-gradient(135deg,#fafaf8 0,#f5f3f0 100%);
       color:var(--text);
     }
 
     .wrap{
-      max-width:1280px;
+      max-width:1000px;
       margin:0 auto;
-      padding:28px;
+      padding:40px 24px;
     }
 
     .card{
       background:var(--panel);
-      backdrop-filter:blur(14px);
-      border:1px solid rgba(31,31,31,.08);
-      box-shadow:var(--shadow);
-      border-radius:28px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-lg);
+      border-radius:24px;
       overflow:hidden;
     }
 
     .hero{
-      padding:44px 52px 28px;
+      padding:56px 48px 32px;
       text-align:center;
-      border-bottom:1px solid rgba(31,31,31,.14);
+      border-bottom:2px solid var(--border);
+      position:relative;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
     }
 
     .hero h1{
       margin:0;
-      font-size:clamp(2.2rem,5vw,4.2rem);
-      letter-spacing:.28em;
-      font-weight:800;
-      color:#2b2b2b;
+      font-family:Playfair Display,serif;
+      font-size:clamp(2.4rem,5vw,3.8rem);
+      font-weight:700;
+      letter-spacing:-.02em;
+      color:var(--accent);
     }
 
     .hero p{
-      margin:10px 0 0;
-      font-size:clamp(1rem,1.6vw,1.3rem);
-      letter-spacing:.24em;
+      margin:16px 0 0;
+      font-size:.95rem;
+      letter-spacing:.18em;
       text-transform:uppercase;
+      font-weight:500;
       color:var(--muted);
+    }
+
+    .divider{
+      width:48px;
+      height:2px;
+      background:linear-gradient(90deg,var(--gold),transparent);
+      margin:12px auto 0;
     }
 
     .grid{
       display:grid;
-      grid-template-columns:280px 1fr;
-      min-height:760px;
+      grid-template-columns:240px 1fr;
+      min-height:auto;
     }
 
     .side{
-      padding:34px 24px 28px;
-      border-right:1px solid rgba(31,31,31,.12);
-      background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.15));
+      padding:40px 28px;
+      background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,250,248,.8));
+      border-right:1px solid var(--border);
     }
 
     .nav{
       display:flex;
       flex-direction:column;
-      gap:8px;
-      padding-bottom:28px;
+      gap:4px;
+      padding-bottom:32px;
     }
 
     .nav button{
       appearance:none;
       border:0;
       background:none;
-      padding:10px 10px 10px 14px;
+      padding:12px 14px 12px 16px;
       text-align:left;
-      font-size:1.05rem;
-      letter-spacing:.16em;
+      font-size:.95rem;
+      letter-spacing:.12em;
       font-weight:600;
-      color:#9a948d;
+      color:#888;
       cursor:pointer;
-      border-left:3px solid transparent;
-      transition:.22s ease;
-      border-radius:0 12px 12px 0;
+      border-left:2px solid transparent;
+      transition:.25s ease;
+      border-radius:0 8px 8px 0;
+      text-transform:uppercase;
     }
 
     .nav button:hover{
-      color:#4a4540;
-      background:rgba(17,17,17,.035);
+      color:var(--accent);
+      background:rgba(201,169,97,.04);
     }
 
     .nav button.active{
       color:var(--accent);
-      border-left-color:var(--accent);
-      background:linear-gradient(90deg,rgba(17,17,17,.07),rgba(17,17,17,0));
+      border-left-color:var(--gold);
+      background:linear-gradient(90deg,rgba(201,169,97,.08),transparent);
     }
 
     .contact{
-      margin-top:44px;
-      padding:18px 14px 0;
-      border-top:1px solid rgba(31,31,31,.12);
+      margin-top:36px;
+      padding:24px 0 0;
+      border-top:1px solid var(--border);
     }
 
     .contact h3{
-      margin:0 0 10px;
-      font-size:.9rem;
+      margin:0 0 14px;
+      font-size:.8rem;
       letter-spacing:.2em;
       text-transform:uppercase;
-      color:#8b8278;
+      font-weight:700;
+      color:var(--gold);
     }
 
     .contact p{
-      margin:7px 0;
-      font-size:.95rem;
-      line-height:1.5;
-      color:#49433d;
+      margin:6px 0;
+      font-size:.9rem;
+      line-height:1.6;
+      color:var(--text);
+    }
+
+    .contact a{
+      color:var(--accent);
+      text-decoration:none;
+      transition:.2s;
+    }
+
+    .contact a:hover{
+      color:var(--gold);
     }
 
     .content{
-      padding:34px 40px 40px;
+      padding:40px 48px;
     }
 
     .section{
       display:none;
-      animation:fade .28s ease;
+      animation:fade .3s ease;
     }
 
     .section.active{display:block}
 
     @keyframes fade{
-      from{opacity:0;transform:translateY(6px)}
+      from{opacity:0;transform:translateY(4px)}
       to{opacity:1;transform:none}
     }
 
     .section h2{
-      margin:0 0 24px;
-      font-size:clamp(1.6rem,2.8vw,2.8rem);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-weight:800;
+      margin:0 0 8px;
+      font-family:Playfair Display,serif;
+      font-size:clamp(1.8rem,3vw,2.6rem);
+      font-weight:700;
+      letter-spacing:-.02em;
       color:var(--accent);
     }
 
-    .bar{
-      width:72px;
-      height:4px;
-      border-radius:999px;
-      background:linear-gradient(90deg,#101010,#666);
-      margin:0 0 22px;
+    .section-bar{
+      width:56px;
+      height:2px;
+      background:var(--gold);
+      margin-bottom:28px;
     }
 
     .about{
       display:grid;
-      grid-template-columns:1.35fr .95fr;
-      gap:34px;
+      grid-template-columns:1.4fr .95fr;
+      gap:40px;
       align-items:start;
     }
 
     .lead{
-      font-size:1.08rem;
-      line-height:1.85;
-      color:#2f2b27;
-      max-width:62ch;
+      font-size:1.05rem;
+      line-height:1.8;
+      color:var(--text);
+      max-width:65ch;
     }
 
     .lead p{margin:0 0 18px}
+    .lead p:last-child{margin-bottom:0}
 
     .portrait{
       width:100%;
       aspect-ratio:4/3;
-      border-radius:22px;
+      border-radius:16px;
       object-fit:cover;
-      box-shadow:0 18px 40px rgba(31,31,31,.14);
-      filter:grayscale(1) contrast(1.02);
+      box-shadow:0 16px 48px rgba(0,0,0,.15);
+      filter:grayscale(.3) contrast(1.05) brightness(.98);
+      border:1px solid var(--border);
     }
 
     .blocks{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
+      gap:20px;
     }
 
     .block{
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(31,31,31,.08);
-      border-radius:20px;
-      padding:18px 18px 16px;
-      box-shadow:0 12px 30px rgba(31,31,31,.05);
+      background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(250,250,248,.6));
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:24px;
+      box-shadow:0 4px 16px rgba(0,0,0,.04);
+      transition:.3s ease;
+    }
+
+    .block:hover{
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      border-color:var(--gold);
     }
 
     .block h4{
-      margin:0 0 10px;
-      font-size:.9rem;
+      margin:0 0 16px;
+      font-size:.85rem;
       letter-spacing:.16em;
       text-transform:uppercase;
-      color:#7a736c;
+      font-weight:700;
+      color:var(--gold);
     }
 
     .block p,.block li{
       margin:0;
-      color:#2f2b27;
-      line-height:1.65;
-      font-size:.98rem;
+      color:var(--text);
+      line-height:1.7;
+      font-size:.95rem;
     }
 
     .block ul{
       margin:0;
-      padding-left:18px;
+      padding-left:20px;
+      list-style:none;
+    }
+
+    .block li{
+      position:relative;
+      padding-left:12px;
+      margin-bottom:8px;
+    }
+
+    .block li::before{
+      content:'→';
+      position:absolute;
+      left:0;
+      color:var(--gold);
+      font-weight:600;
     }
 
     .timeline{
       display:grid;
-      gap:16px;
+      gap:20px;
     }
 
     .item{
-      padding:18px 20px;
-      border-left:3px solid rgba(17,17,17,.45);
-      background:rgba(255,255,255,.72);
-      border-radius:0 18px 18px 0;
-      border-top:1px solid rgba(31,31,31,.08);
-      border-right:1px solid rgba(31,31,31,.08);
-      border-bottom:1px solid rgba(31,31,31,.08);
+      padding:24px;
+      border-left:3px solid var(--gold);
+      background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(250,250,248,.4));
+      border-radius:0 12px 12px 0;
+      border:1px solid var(--border);
+      border-left:3px solid var(--gold);
+      box-shadow:0 2px 8px rgba(0,0,0,.04);
+      transition:.3s ease;
+    }
+
+    .item:hover{
+      box-shadow:0 6px 20px rgba(0,0,0,.08);
+      background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(250,250,248,.6));
     }
 
     .item .meta{
-      font-size:.85rem;
+      font-size:.8rem;
       letter-spacing:.14em;
       text-transform:uppercase;
-      color:#8f857b;
-      margin-bottom:6px;
+      color:var(--muted);
+      margin-bottom:8px;
+      font-weight:600;
     }
 
     .item h3{
-      margin:0 0 8px;
-      font-size:1.1rem;
+      margin:0 0 10px;
+      font-size:1.15rem;
+      color:var(--accent);
+      font-weight:600;
     }
 
     .item p{
-      margin:0;
-      color:#413c36;
+      margin:0 0 12px;
+      color:var(--text);
       line-height:1.7;
+      font-size:.95rem;
     }
 
+    .item p:last-child{margin-bottom:0}
+
     .item a{
-      color:var(--accent);
+      color:var(--gold);
       text-decoration:none;
+      font-weight:500;
+      transition:.2s;
     }
 
     .item a:hover{
@@ -267,22 +337,32 @@
     }
 
     .thesis{
-      margin-top:12px;
-      padding:12px 14px;
-      background:rgba(17,17,17,.03);
-      border-left:3px solid var(--accent);
+      margin-top:16px;
+      padding:16px 16px 16px 20px;
+      background:rgba(201,169,97,.05);
+      border-left:3px solid var(--gold);
       border-radius:8px;
-      font-size:.95rem;
+      font-size:.9rem;
     }
 
     .thesis p{
       margin:0 0 8px;
+      color:var(--text);
       line-height:1.65;
     }
 
-    .thesis a{
+    .thesis p:last-child{margin-bottom:0}
+
+    .thesis strong{
       color:var(--accent);
+      font-weight:600;
+    }
+
+    .thesis a{
+      color:var(--gold);
       text-decoration:none;
+      font-weight:500;
+      transition:.2s;
     }
 
     .thesis a:hover{
@@ -293,9 +373,11 @@
       .grid{grid-template-columns:1fr}
       .side{
         border-right:0;
-        border-bottom:1px solid rgba(31,31,31,.12);
+        border-bottom:1px solid var(--border);
       }
       .about,.blocks{grid-template-columns:1fr}
+      .content{padding:32px 28px}
+      .wrap{padding:28px 16px}
     }
   </style>
 </head>
@@ -304,85 +386,86 @@
     <div class="card">
       <header class="hero">
         <h1>JASPER ANTTILA</h1>
-        <p>KTM, TIETOJÄRJESTELMÄTIEDE</p>
+        <div class="divider"></div>
+        <p>Master's in Information Systems</p>
       </header>
 
       <div class="grid">
         <aside class="side">
-          <nav class="nav" aria-label="Ansioluettelon osiot">
-            <button class="active" data-target="about">TIETOA</button>
-            <button data-target="experience">KOKEMUS</button>
-            <button data-target="education">KOULUTUS</button>
-            <button data-target="skills">TAIDOT</button>
+          <nav class="nav" aria-label="Resume sections">
+            <button class="active" data-target="about">About</button>
+            <button data-target="experience">Experience</button>
+            <button data-target="education">Education</button>
+            <button data-target="skills">Skills</button>
           </nav>
 
           <div class="contact">
-            <h3>Yhteystiedot</h3>
+            <h3>Contact</h3>
             <p>jasper.anttila@email.com</p>
             <p>+358 40 123 4567</p>
-            <p>Porvoo, Suomi</p>
-            <p>linkedin.com/in/jasperanttila</p>
+            <p>Porvoo, Finland</p>
+            <p><a href="https://linkedin.com/in/jasperanttila" target="_blank" rel="noreferrer">linkedin.com/in/jasperanttila</a></p>
           </div>
         </aside>
 
         <main class="content">
           <section class="section active" id="about">
-            <div class="bar"></div>
-            <h2>Tietoa</h2>
+            <h2>About</h2>
+            <div class="section-bar"></div>
             <div class="about">
               <div class="lead">
-                <p>Terve. Olen ohjelmistokehittäjä ja maisteriopiskelija, joka keskittyy tekoäly-avusteiseen kehitykseen, generatiivisen tekoälyn tutkimukseen ja käytännön digitaalisen tuotannon työnkulkuihin.</p>
-                <p>Rakennan luotettavaa ohjelmistoa, tutkin kuinka tekoäly muuttaa kehittäjien työtä ja nautin teknisen ajattelun yhdistämisestä visuaaliseen tarinankerrontaan.</p>
+                <p>Software developer and graduate student focused on AI-assisted development, generative AI research, and practical digital innovation.</p>
+                <p>I build reliable software, research how AI transforms developer workflows, and enjoy combining technical thinking with visual storytelling.</p>
               </div>
-              <img class="portrait" src="profile.jpg" alt="Profiili- tai portfoliokuva">
+              <img class="portrait" src="profile.jpg" alt="Professional portrait">
             </div>
           </section>
 
           <section class="section" id="experience">
-            <div class="bar"></div>
-            <h2>Kokemus</h2>
+            <h2>Experience</h2>
+            <div class="section-bar"></div>
             <div class="timeline">
               <div class="item">
-                <div class="meta">2023 — Nykyään</div>
-                <h3>Ohjelmistokehittäjä</h3>
-                <p>Kehitin web-ominaisuuksia, automaatiotyönkulkuja ja tekoäly-avusteisia kehitysprosesseja painottaen laatua ja ylläpidettävyyttä.</p>
+                <div class="meta">2023 — Present</div>
+                <h3>Software Developer</h3>
+                <p>Developed web features, automation workflows, and AI-assisted development processes with emphasis on quality and maintainability.</p>
               </div>
               <div class="item">
-                <div class="meta">Aiemmin</div>
-                <h3>Video / Web / Markkinointi</h3>
-                <p>Työskentelin sisällöntuotannon, videoeditoinnin, web-kehityksen ja digitaalisen markkinoinnin parissa yhdistäen tekniset ja luovat taidot.</p>
+                <div class="meta">Previously</div>
+                <h3>Video / Web / Marketing</h3>
+                <p>Worked in content production, video editing, web development, and digital marketing, combining technical and creative skills.</p>
               </div>
             </div>
           </section>
 
           <section class="section" id="education">
-            <div class="bar"></div>
-            <h2>Koulutus</h2>
+            <h2>Education</h2>
+            <div class="section-bar"></div>
             <div class="timeline">
               <div class="item">
                 <div class="meta">2021 — 2026</div>
-                <h3>Tietojärjestelmätieteen kandi- ja maisterikoulutus</h3>
-                <p><strong>Jyväskylän yliopisto</strong></p>
-
+                <h3>B.Sc. & M.Sc. Information Systems</h3>
+                <p><strong>University of Jyväskylä</strong></p>
+                
                 <div class="thesis">
-                  <p><strong>Kanditutkielma:</strong> Tekoälyn hyödyntäminen kuluttajan asiakaspolulla, arvosana 5</p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Lue tutkielma →</a></p>
+                  <p><strong>Bachelor's Thesis:</strong> AI Utilization in Consumer Customer Journey (Grade: 5)</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Read thesis →</a></p>
                 </div>
 
                 <div class="thesis">
-                  <p><strong>Maisterintutkielma:</strong> Ohjelmistokehittäjät ja generatiivinen tekoäly: työn vaatimukset ja voimavarat, arvosana 4</p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">Lue tutkielma →</a></p>
+                  <p><strong>Master's Thesis:</strong> Software Developers and Generative AI: Job Demands and Resources (Grade: 4)</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">Read thesis →</a></p>
                 </div>
               </div>
             </div>
           </section>
 
           <section class="section" id="skills">
-            <div class="bar"></div>
-            <h2>Taidot</h2>
+            <h2>Skills</h2>
+            <div class="section-bar"></div>
             <div class="blocks">
               <div class="block">
-                <h4>Ohjelmistokehitys</h4>
+                <h4>Software Development</h4>
                 <ul>
                   <li>JavaScript / Node.js</li>
                   <li>Python</li>
@@ -391,12 +474,12 @@
                 </ul>
               </div>
               <div class="block">
-                <h4>Tutkimus / Luovuus</h4>
+                <h4>Research & Creative</h4>
                 <ul>
-                  <li>Laadulliset menetelmät</li>
-                  <li>Teemaanalyysi</li>
-                  <li>Valokuvaus</li>
-                  <li>Videoeditointi</li>
+                  <li>Qualitative Methods</li>
+                  <li>Thematic Analysis</li>
+                  <li>Photography</li>
+                  <li>Video Editing</li>
                 </ul>
               </div>
             </div>
