@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="fi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jasper Anttila | Resume</title>
+  <title>Jasper Anttila | Ansioluettelo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -258,6 +258,33 @@
       line-height:1.7;
     }
 
+    .item a{
+      color:var(--accent);
+      text-decoration:none;
+    }
+
+    .item a:hover{
+      text-decoration:underline;
+    }
+
+    .thesis{
+      margin-top:12px;
+      padding:12px;
+      background:rgba(217,119,6,.05);
+      border-left:3px solid var(--accent);
+      border-radius:8px;
+      font-size:.95rem;
+    }
+
+    .thesis a{
+      color:var(--accent);
+      text-decoration:none;
+    }
+
+    .thesis a:hover{
+      text-decoration:underline;
+    }
+
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
       .side{
@@ -278,18 +305,18 @@
 
       <div class="grid">
         <aside class="side">
-          <nav class="nav" aria-label="Resume sections">
-            <button class="active" data-target="about">ABOUT</button>
-            <button data-target="experience">EXPERIENCE</button>
-            <button data-target="education">EDUCATION</button>
-            <button data-target="skills">SKILLS</button>
+          <nav class="nav" aria-label="Ansioluettelon osiot">
+            <button class="active" data-target="about">TIETOA</button>
+            <button data-target="experience">KOKEMUS</button>
+            <button data-target="education">KOULUTUS</button>
+            <button data-target="skills">TAIDOT</button>
           </nav>
 
           <div class="contact">
-            <h3>Contact</h3>
+            <h3>Yhteystiedot</h3>
             <p>jasper.anttila@email.com</p>
             <p>+358 40 123 4567</p>
-            <p>Porvoo, Finland</p>
+            <p>Porvoo, Suomi</p>
             <p>linkedin.com/in/jasperanttila</p>
           </div>
         </aside>
@@ -297,54 +324,61 @@
         <main class="content">
           <section class="section active" id="about">
             <div class="bar"></div>
-            <h2>About</h2>
+            <h2>Tietoa</h2>
             <div class="about">
               <div class="lead">
-                <p>Hello. I'm a software developer and master's student focused on AI-assisted development, generative AI research, and practical digital production workflows.</p>
-                <p>I build reliable software, study how AI changes developer work, and enjoy combining technical thinking with visual storytelling.</p>
+                <p>Terve. Olen ohjelmistokehittäjä ja maisteriopiskelija, joka keskittyy tekoäly-avusteiseen kehitykseen, generatiivisen tekoälyn tutkimukseen ja käytännön digitaalisen tuotannon työnkulkuihin.</p>
+                <p>Rakennan luotettavaa ohjelmistoa, tutkin kuinka tekoäly muuttaa kehittäjien työtä ja nautin teknisen ajattelun yhdistämisestä visuaaliseen tarinankerrontaan.</p>
               </div>
-              <img class="portrait" src="profile.jpg" alt="Portrait or portfolio image">
+              <img class="portrait" src="profile.jpg" alt="Profiili- tai portfoliokuva">
             </div>
           </section>
 
           <section class="section" id="experience">
             <div class="bar"></div>
-            <h2>Experience</h2>
+            <h2>Kokemus</h2>
             <div class="timeline">
               <div class="item">
-                <div class="meta">2023 — Present</div>
-                <h3>Software Developer</h3>
-                <p>Built web features, automation workflows, and AI-assisted development processes with a focus on quality and maintainability.</p>
+                <div class="meta">2023 — Nykyään</div>
+                <h3>Ohjelmistokehittäjä</h3>
+                <p>Kehitin web-ominaisuuksia, automaatiotyönkulkuja ja tekoäly-avusteisia kehitysprosesseja painottaen laatua ja ylläpidettävyyttä.</p>
               </div>
               <div class="item">
-                <div class="meta">Earlier</div>
-                <h3>Video / Web / Marketing</h3>
-                <p>Worked across content production, video editing, web development, and digital marketing, combining technical and creative skills.</p>
+                <div class="meta">Aiemmin</div>
+                <h3>Video / Web / Markkinointi</h3>
+                <p>Työskentelin sisällöntuotannon, videoeditoinnin, web-kehityksen ja digitaalisen markkinoinnin parissa yhdistäen tekniset ja luovat taidot.</p>
               </div>
             </div>
           </section>
 
           <section class="section" id="education">
             <div class="bar"></div>
-            <h2>Education</h2>
-            <div class="blocks">
-              <div class="block">
-                <h4>Master's</h4>
-                <p>Information Systems / Information Technology</p>
-              </div>
-              <div class="block">
-                <h4>Focus</h4>
-                <p>Generative AI, qualitative research, software development practices, and work experience analysis.</p>
+            <h2>Koulutus</h2>
+            <div class="timeline">
+              <div class="item">
+                <div class="meta">2021 — 2026</div>
+                <h3>Tietojärjestelmätieteen kandi- ja maisterikoulutus</h3>
+                <p><strong>Jyväskylän Yliopisto</strong></p>
+                
+                <div class="thesis">
+                  <p><strong>Kanditutkielma:</strong> Tekoälyn hyödyntäminen kuluttajan asiakaspolulla</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank">Lue tutkielma →</a></p>
+                </div>
+
+                <div class="thesis">
+                  <p><strong>Maisterintutkielma:</strong> Ohjelmistokehittäjät ja generatiivinen tekoäly: työn vaatimukset ja voimavarat</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank">Lue tutkielma →</a></p>
+                </div>
               </div>
             </div>
           </section>
 
           <section class="section" id="skills">
             <div class="bar"></div>
-            <h2>Skills</h2>
+            <h2>Taidot</h2>
             <div class="blocks">
               <div class="block">
-                <h4>Development</h4>
+                <h4>Ohjelmistokehitys</h4>
                 <ul>
                   <li>JavaScript / Node.js</li>
                   <li>Python</li>
@@ -353,12 +387,12 @@
                 </ul>
               </div>
               <div class="block">
-                <h4>Research / Creative</h4>
+                <h4>Tutkimus / Luovuus</h4>
                 <ul>
-                  <li>Qualitative methods</li>
-                  <li>Thematic analysis</li>
-                  <li>Photography</li>
-                  <li>Video editing</li>
+                  <li>Laadulliset menetelmät</li>
+                  <li>Teemaanalyysi</li>
+                  <li>Valokuvaus</li>
+                  <li>Videoeditoiniti</li>
                 </ul>
               </div>
             </div>
