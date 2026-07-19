@@ -4,67 +4,380 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jasper Anttila | Resume</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f5f1;
+      --panel:#ffffffcc;
+      --line:#1f1f1f;
+      --text:#232323;
+      --muted:#77716a;
+      --accent:#d97706;
+      --accent2:#f59e0b;
+      --shadow:0 24px 80px rgba(31,31,31,.10);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      background:radial-gradient(circle at top,#fff 0,#f7f5f1 48%,#f1ece4 100%);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:28px;
+    }
+
+    .card{
+      background:var(--panel);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(31,31,31,.08);
+      box-shadow:var(--shadow);
+      border-radius:28px;
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:44px 52px 28px;
+      text-align:center;
+      border-bottom:1px solid rgba(31,31,31,.14);
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:clamp(2.2rem,5vw,4.2rem);
+      letter-spacing:.28em;
+      font-weight:800;
+      color:#2b2b2b;
+    }
+
+    .hero p{
+      margin:10px 0 0;
+      font-size:clamp(1rem,1.6vw,1.3rem);
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      min-height:760px;
+    }
+
+    .side{
+      padding:34px 24px 28px;
+      border-right:1px solid rgba(31,31,31,.12);
+      background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.15));
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding-bottom:28px;
+    }
+
+    .nav button{
+      appearance:none;
+      border:0;
+      background:none;
+      padding:10px 10px 10px 14px;
+      text-align:left;
+      font-size:1.05rem;
+      letter-spacing:.16em;
+      font-weight:600;
+      color:#9a948d;
+      cursor:pointer;
+      border-left:3px solid transparent;
+      transition:.22s ease;
+      border-radius:0 12px 12px 0;
+    }
+
+    .nav button:hover{
+      color:#4a4540;
+      background:rgba(217,119,6,.06);
+    }
+
+    .nav button.active{
+      color:var(--accent);
+      border-left-color:var(--accent);
+      background:linear-gradient(90deg,rgba(217,119,6,.10),rgba(217,119,6,0));
+    }
+
+    .contact{
+      margin-top:44px;
+      padding:18px 14px 0;
+      border-top:1px solid rgba(31,31,31,.12);
+    }
+
+    .contact h3{
+      margin:0 0 10px;
+      font-size:.9rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:#8b8278;
+    }
+
+    .contact p{
+      margin:7px 0;
+      font-size:.95rem;
+      line-height:1.5;
+      color:#49433d;
+    }
+
+    .content{
+      padding:34px 40px 40px;
+    }
+
+    .section{
+      display:none;
+      animation:fade .28s ease;
+    }
+
+    .section.active{display:block}
+
+    @keyframes fade{
+      from{opacity:0;transform:translateY(6px)}
+      to{opacity:1;transform:none}
+    }
+
+    .section h2{
+      margin:0 0 24px;
+      font-size:clamp(1.6rem,2.8vw,2.8rem);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--accent);
+    }
+
+    .bar{
+      width:72px;
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      margin:0 0 22px;
+    }
+
+    .about{
+      display:grid;
+      grid-template-columns:1.35fr .95fr;
+      gap:34px;
+      align-items:start;
+    }
+
+    .lead{
+      font-size:1.08rem;
+      line-height:1.85;
+      color:#2f2b27;
+      max-width:62ch;
+    }
+
+    .lead p{margin:0 0 18px}
+
+    .portrait{
+      width:100%;
+      aspect-ratio:4/3;
+      border-radius:22px;
+      object-fit:cover;
+      box-shadow:0 18px 40px rgba(31,31,31,.14);
+      filter:saturate(.95) contrast(1.02);
+    }
+
+    .blocks{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .block{
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(31,31,31,.08);
+      border-radius:20px;
+      padding:18px 18px 16px;
+      box-shadow:0 12px 30px rgba(31,31,31,.05);
+    }
+
+    .block h4{
+      margin:0 0 10px;
+      font-size:.9rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#7a736c;
+    }
+
+    .block p,.block li{
+      margin:0;
+      color:#2f2b27;
+      line-height:1.65;
+      font-size:.98rem;
+    }
+
+    .block ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .timeline{
+      display:grid;
+      gap:16px;
+    }
+
+    .item{
+      padding:18px 20px;
+      border-left:3px solid rgba(217,119,6,.45);
+      background:rgba(255,255,255,.72);
+      border-radius:0 18px 18px 0;
+      border-top:1px solid rgba(31,31,31,.08);
+      border-right:1px solid rgba(31,31,31,.08);
+      border-bottom:1px solid rgba(31,31,31,.08);
+    }
+
+    .item .meta{
+      font-size:.85rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#8f857b;
+      margin-bottom:6px;
+    }
+
+    .item h3{
+      margin:0 0 8px;
+      font-size:1.1rem;
+    }
+
+    .item p{
+      margin:0;
+      color:#413c36;
+      line-height:1.7;
+    }
+
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+      .side{
+        border-right:0;
+        border-bottom:1px solid rgba(31,31,31,.12);
+      }
+      .about,.blocks{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-  <main class="resume">
-    <header class="top">
-      <h1>JASPER ANTTILA</h1>
-      <p>KTM, TIETOJÄRJESTELMÄTIEDE</p>
-    </header>
+  <div class="wrap">
+    <div class="card">
+      <header class="hero">
+        <h1>JASPER ANTTILA</h1>
+        <p>KTM, TIETOJÄRJESTELMÄTIEDE</p>
+      </header>
 
-    <div class="content">
-      <aside class="nav">
-        <button class="nav-item active" data-target="about">ABOUT</button>
-        <button class="nav-item" data-target="experience">EXPERIENCE</button>
-        <button class="nav-item" data-target="education">EDUCATION</button>
-        <button class="nav-item" data-target="skills">SKILLS</button>
+      <div class="grid">
+        <aside class="side">
+          <nav class="nav" aria-label="Resume sections">
+            <button class="active" data-target="about">ABOUT</button>
+            <button data-target="experience">EXPERIENCE</button>
+            <button data-target="education">EDUCATION</button>
+            <button data-target="skills">SKILLS</button>
+          </nav>
 
-        <div class="contact">
-          <p>Let's talk.</p>
-          <p>gladis.bakes@nowhere.com</p>
-          <p>555.555.BAKE</p>
-          <p>gladisbakes.com</p>
-        </div>
-      </aside>
-
-      <section class="panel">
-        <article class="section active" id="about">
-          <h2>ABOUT</h2>
-          <div class="section-grid">
-            <div>
-              <p>Hello! Write your intro here. Keep it short, clear, and recruiter-friendly.</p>
-              <p>Add a second paragraph if needed. You can also mention your main focus and strengths.</p>
-            </div>
-            <img src="profile.jpg" alt="Profile photo" />
+          <div class="contact">
+            <h3>Contact</h3>
+            <p>jasper.anttila@email.com</p>
+            <p>+358 40 123 4567</p>
+            <p>Porvoo, Finland</p>
+            <p>linkedin.com/in/jasperanttila</p>
           </div>
-        </article>
+        </aside>
 
-        <article class="section" id="experience">
-          <h2>EXPERIENCE</h2>
-          <p><strong>Software Developer</strong> — Company Name</p>
-          <p>Short description of your work and impact.</p>
-        </article>
+        <main class="content">
+          <section class="section active" id="about">
+            <div class="bar"></div>
+            <h2>About</h2>
+            <div class="about">
+              <div class="lead">
+                <p>Hello. I'm a software developer and master's student focused on AI-assisted development, generative AI research, and practical digital production workflows.</p>
+                <p>I build reliable software, study how AI changes developer work, and enjoy combining technical thinking with visual storytelling.</p>
+              </div>
+              <img class="portrait" src="profile.jpg" alt="Portrait or portfolio image">
+            </div>
+          </section>
 
-        <article class="section" id="education">
-          <h2>EDUCATION</h2>
-          <p><strong>MSc in Information Systems</strong> — University Name</p>
-          <p>Thesis topic, relevant coursework, or achievements.</p>
-        </article>
+          <section class="section" id="experience">
+            <div class="bar"></div>
+            <h2>Experience</h2>
+            <div class="timeline">
+              <div class="item">
+                <div class="meta">2023 — Present</div>
+                <h3>Software Developer</h3>
+                <p>Built web features, automation workflows, and AI-assisted development processes with a focus on quality and maintainability.</p>
+              </div>
+              <div class="item">
+                <div class="meta">Earlier</div>
+                <h3>Video / Web / Marketing</h3>
+                <p>Worked across content production, video editing, web development, and digital marketing, combining technical and creative skills.</p>
+              </div>
+            </div>
+          </section>
 
-        <article class="section" id="skills">
-          <h2>SKILLS</h2>
-          <ul>
-            <li>JavaScript / TypeScript</li>
-            <li>Python</li>
-            <li>Qualitative research</li>
-            <li>AI-assisted development</li>
-          </ul>
-        </article>
-      </section>
+          <section class="section" id="education">
+            <div class="bar"></div>
+            <h2>Education</h2>
+            <div class="blocks">
+              <div class="block">
+                <h4>Master's</h4>
+                <p>Information Systems / Information Technology</p>
+              </div>
+              <div class="block">
+                <h4>Focus</h4>
+                <p>Generative AI, qualitative research, software development practices, and work experience analysis.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="skills">
+            <div class="bar"></div>
+            <h2>Skills</h2>
+            <div class="blocks">
+              <div class="block">
+                <h4>Development</h4>
+                <ul>
+                  <li>JavaScript / Node.js</li>
+                  <li>Python</li>
+                  <li>SQL</li>
+                  <li>GitHub / Docker</li>
+                </ul>
+              </div>
+              <div class="block">
+                <h4>Research / Creative</h4>
+                <ul>
+                  <li>Qualitative methods</li>
+                  <li>Thematic analysis</li>
+                  <li>Photography</li>
+                  <li>Video editing</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
-  </main>
+  </div>
 
-  <script src="script.js"></script>
+  <script>
+    const buttons = document.querySelectorAll('.nav button');
+    const sections = document.querySelectorAll('.section');
+
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    }));
+  </script>
 </body>
 </html>
