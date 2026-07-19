@@ -14,8 +14,7 @@
       --line:#1f1f1f;
       --text:#232323;
       --muted:#77716a;
-      --accent:#d97706;
-      --accent2:#f59e0b;
+      --accent:#101010;
       --shadow:0 24px 80px rgba(31,31,31,.10);
     }
 
@@ -102,13 +101,13 @@
 
     .nav button:hover{
       color:#4a4540;
-      background:rgba(217,119,6,.06);
+      background:rgba(17,17,17,.035);
     }
 
     .nav button.active{
       color:var(--accent);
       border-left-color:var(--accent);
-      background:linear-gradient(90deg,rgba(217,119,6,.10),rgba(217,119,6,0));
+      background:linear-gradient(90deg,rgba(17,17,17,.07),rgba(17,17,17,0));
     }
 
     .contact{
@@ -161,7 +160,7 @@
       width:72px;
       height:4px;
       border-radius:999px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      background:linear-gradient(90deg,#101010,#666);
       margin:0 0 22px;
     }
 
@@ -187,7 +186,7 @@
       border-radius:22px;
       object-fit:cover;
       box-shadow:0 18px 40px rgba(31,31,31,.14);
-      filter:saturate(.95) contrast(1.02);
+      filter:grayscale(1) contrast(1.02);
     }
 
     .blocks{
@@ -231,7 +230,7 @@
 
     .item{
       padding:18px 20px;
-      border-left:3px solid rgba(217,119,6,.45);
+      border-left:3px solid rgba(17,17,17,.45);
       background:rgba(255,255,255,.72);
       border-radius:0 18px 18px 0;
       border-top:1px solid rgba(31,31,31,.08);
@@ -269,11 +268,16 @@
 
     .thesis{
       margin-top:12px;
-      padding:12px;
-      background:rgba(217,119,6,.05);
+      padding:12px 14px;
+      background:rgba(17,17,17,.03);
       border-left:3px solid var(--accent);
       border-radius:8px;
       font-size:.95rem;
+    }
+
+    .thesis p{
+      margin:0 0 8px;
+      line-height:1.65;
     }
 
     .thesis a{
@@ -358,16 +362,16 @@
               <div class="item">
                 <div class="meta">2021 — 2026</div>
                 <h3>Tietojärjestelmätieteen kandi- ja maisterikoulutus</h3>
-                <p><strong>Jyväskylän Yliopisto</strong></p>
-                
+                <p><strong>Jyväskylän yliopisto</strong></p>
+
                 <div class="thesis">
-                  <p><strong>Kanditutkielma:</strong> Tekoälyn hyödyntäminen kuluttajan asiakaspolulla, arvosana 5 </p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank">Lue tutkielma →</a></p>
+                  <p><strong>Kanditutkielma:</strong> Tekoälyn hyödyntäminen kuluttajan asiakaspolulla, arvosana 5</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Lue tutkielma →</a></p>
                 </div>
 
                 <div class="thesis">
-                  <p><strong>Maisterintutkielma:</strong> Ohjelmistokehittäjät ja generatiivinen tekoäly: työn vaatimukset ja voimavarat, arvosana 4 </p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank">Lue tutkielma →</a></p>
+                  <p><strong>Maisterintutkielma:</strong> Ohjelmistokehittäjät ja generatiivinen tekoäly: työn vaatimukset ja voimavarat, arvosana 4</p>
+                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">Lue tutkielma →</a></p>
                 </div>
               </div>
             </div>
@@ -392,7 +396,7 @@
                   <li>Laadulliset menetelmät</li>
                   <li>Teemaanalyysi</li>
                   <li>Valokuvaus</li>
-                  <li>Videoeditoiniti</li>
+                  <li>Videoeditointi</li>
                 </ul>
               </div>
             </div>
