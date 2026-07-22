@@ -25,8 +25,61 @@
     body{
       margin:0;
       font-family:Inter,system-ui,sans-serif;
-      background:linear-gradient(135deg,#fafaf8 0,#f5f3f0 100%);
+      background:#fafaf8;
       color:var(--text);
+      overflow-x:hidden;
+    }
+
+    .bg-mesh{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      overflow:hidden;
+      background:linear-gradient(135deg,#fafaf8 0,#f5f3f0 100%);
+    }
+
+    .bg-mesh::before,
+    .bg-mesh::after{
+      content:'';
+      position:absolute;
+      width:min(60vw,700px);
+      height:min(60vw,700px);
+      border-radius:50%;
+      filter:blur(90px);
+      opacity:.4;
+      animation:drift 24s ease-in-out infinite alternate;
+      will-change:transform;
+    }
+
+    .bg-mesh::before{
+      top:-15%;
+      left:-12%;
+      background:radial-gradient(circle at 30% 30%,rgba(201,169,97,.55),transparent 70%);
+    }
+
+    .bg-mesh::after{
+      bottom:-18%;
+      right:-12%;
+      background:radial-gradient(circle at 60% 60%,rgba(26,26,26,.1),transparent 70%);
+      animation-delay:-12s;
+    }
+
+    .bg-mesh .noise{
+      position:absolute;
+      inset:0;
+      opacity:.03;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    @keyframes drift{
+      from{transform:translate(0,0) scale(1)}
+      to{transform:translate(4%,6%) scale(1.08)}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .bg-mesh::before,
+      .bg-mesh::after{animation:none}
     }
 
     .wrap{
@@ -41,6 +94,20 @@
       box-shadow:var(--shadow-lg);
       border-radius:24px;
       overflow:hidden;
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    body.loaded .card{
+      opacity:1;
+      transform:none;
+    }
+
+    noscript .card,
+    .no-js .card{
+      opacity:1 !important;
+      transform:none !important;
     }
 
     .hero{
@@ -116,7 +183,7 @@
       color:#888;
       cursor:pointer;
       border-left:2px solid transparent;
-      transition:.25s ease;
+      transition:color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
       border-radius:0 8px 8px 0;
       text-transform:uppercase;
     }
@@ -124,6 +191,12 @@
     .nav button:hover{
       color:var(--accent);
       background:rgba(201,169,97,.04);
+      transform:translateX(4px);
+      box-shadow:0 2px 12px rgba(201,169,97,.18);
+    }
+
+    .nav button.active{
+      transform:none;
     }
 
     .nav button.active{
@@ -155,13 +228,30 @@
     }
 
     .contact a{
+      position:relative;
+      display:inline-block;
       color:var(--accent);
       text-decoration:none;
-      transition:.2s;
+      transition:color .2s;
+    }
+
+    .contact a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-2px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .3s ease;
     }
 
     .contact a:hover{
       color:var(--gold);
+    }
+
+    .contact a:hover::after{
+      width:100%;
     }
 
     .content{
@@ -448,14 +538,27 @@
     }
 
     .timeline-description a{
+      position:relative;
+      display:inline-block;
       color:var(--gold);
       text-decoration:none;
       font-weight:500;
-      transition:.2s;
+      transition:color .2s;
     }
 
-    .timeline-description a:hover{
-      text-decoration:underline;
+    .timeline-description a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .3s ease;
+    }
+
+    .timeline-description a:hover::after{
+      width:100%;
     }
 
     /* Education Timeline - Greyed Out */
@@ -554,14 +657,27 @@
     .item p:last-child{margin-bottom:0}
 
     .item a{
+      position:relative;
+      display:inline-block;
       color:var(--gold);
       text-decoration:none;
       font-weight:500;
-      transition:.2s;
+      transition:color .2s;
     }
 
-    .item a:hover{
-      text-decoration:underline;
+    .item a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .3s ease;
+    }
+
+    .item a:hover::after{
+      width:100%;
     }
 
     .thesis{
@@ -587,14 +703,27 @@
     }
 
     .thesis a{
+      position:relative;
+      display:inline-block;
       color:var(--gold);
       text-decoration:none;
       font-weight:500;
-      transition:.2s;
+      transition:color .2s;
     }
 
-    .thesis a:hover{
-      text-decoration:underline;
+    .thesis a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .3s ease;
+    }
+
+    .thesis a:hover::after{
+      width:100%;
     }
 
     @media (max-width: 1200px){
@@ -628,9 +757,74 @@
         left:20px;
       }
     }
+
+    /* Scroll-in reveal (placed last so it wins the transition cascade over
+       component-level `transition: .3s ease` shorthand rules like .block/.item) */
+    .reveal{
+      opacity:0;
+      transform:translateY(16px);
+      transition:opacity .55s ease, transform .55s ease;
+    }
+
+    .reveal.in-view{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1;transform:none;transition:none}
+    }
+
+    @media print{
+      body{background:#fff}
+      .bg-mesh{display:none}
+      .wrap{max-width:100%;padding:0;margin:0}
+      .card{
+        box-shadow:none;
+        border:none;
+        border-radius:0;
+        opacity:1!important;
+        transform:none!important;
+      }
+      .grid{grid-template-columns:1fr}
+      .side{
+        border-right:none;
+        border-bottom:1px solid #ccc;
+        padding:0 0 16px;
+      }
+      .nav{display:none}
+      .contact{margin-top:16px}
+      .content{padding:16px 0}
+      .hero{padding:0 0 20px;border-bottom:1px solid #ccc}
+      .section{
+        display:block!important;
+        opacity:1!important;
+        transform:none!important;
+        animation:none!important;
+        page-break-inside:avoid;
+        margin-bottom:28px;
+        padding-bottom:20px;
+        border-bottom:1px solid #ddd;
+      }
+      .section:last-child{border-bottom:none;margin-bottom:0}
+      .timeline-content{
+        max-height:none!important;
+        overflow:visible!important;
+        opacity:1!important;
+        animation:none!important;
+      }
+      .timeline-item{cursor:default}
+      .dual-timeline-wrapper{grid-template-columns:1fr 1fr}
+      .reveal{opacity:1!important;transform:none!important;transition:none!important}
+      a{color:#000!important}
+      a::after{display:none!important}
+      .portrait{filter:none;box-shadow:none}
+    }
   </style>
+  <noscript><style>.card{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+  <div class="bg-mesh"><div class="noise"></div></div>
   <div class="wrap">
     <div class="card">
       <header class="hero">
@@ -663,10 +857,10 @@
             <div class="section-bar"></div>
             <div class="about">
               <div class="lead">
-                <p>Software developer and graduate student focused on AI-assisted development, generative AI research, and practical digital innovation.</p>
-                <p>I build reliable software, research how AI transforms developer workflows, and enjoy combining technical thinking with visual storytelling.</p>
+                <p class="reveal">Software developer and graduate student focused on AI-assisted development, generative AI research, and practical digital innovation.</p>
+                <p class="reveal">I build reliable software, research how AI transforms developer workflows, and enjoy combining technical thinking with visual storytelling.</p>
               </div>
-              <img class="portrait" src="profile.jpg" alt="Professional portrait">
+              <img class="portrait reveal" src="profile.jpg" alt="Professional portrait">
             </div>
           </section>
 
@@ -680,7 +874,7 @@
                 <div class="timeline-container">
                   <div class="timeline-line"></div>
                   <div class="timeline-items">
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">1</div>
                       <div class="timeline-title">Entrepreneur / Business Owner</div>
                       <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
@@ -696,7 +890,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">2</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
@@ -710,7 +904,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">3</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
@@ -723,7 +917,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">4</div>
                       <div class="timeline-title">Customer Procurer for Sales</div>
                       <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
@@ -735,7 +929,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">5</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
@@ -747,7 +941,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">6</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
@@ -759,7 +953,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                       <div class="timeline-dot">7</div>
                       <div class="timeline-title">Construction Worker</div>
                       <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
@@ -782,7 +976,7 @@
                 <div class="timeline-container education">
                   <div class="timeline-line education"></div>
                   <div class="timeline-items">
-                    <div class="timeline-item education">
+                    <div class="timeline-item education reveal">
                       <div class="timeline-dot education">📚</div>
                       <div class="timeline-title education">Master's Degree</div>
                       <div class="timeline-meta">University of Jyväskylä · Feb 2021 - May 2026</div>
@@ -804,17 +998,17 @@
             <h2>Education</h2>
             <div class="section-bar"></div>
             <div class="timeline">
-              <div class="item">
+              <div class="item reveal">
                 <div class="meta">2021 — 2026</div>
                 <h3>B.Sc. & M.Sc. Information Systems</h3>
                 <p><strong>University of Jyväskylä</strong></p>
                 
-                <div class="thesis">
+                <div class="thesis reveal">
                   <p><strong>Bachelor's Thesis:</strong> AI Utilization in Consumer Customer Journey (Grade: 5)</p>
                   <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Read thesis →</a></p>
                 </div>
 
-                <div class="thesis">
+                <div class="thesis reveal">
                   <p><strong>Master's Thesis:</strong> Software Developers and Generative AI: Job Demands and Resources (Grade: 4)</p>
                   <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">Read thesis →</a></p>
                 </div>
@@ -826,22 +1020,22 @@
             <h2>Skills</h2>
             <div class="section-bar"></div>
             <div class="blocks">
-              <div class="block">
+              <div class="block reveal">
                 <h4>Software Development</h4>
                 <ul>
-                  <li>JavaScript / Node.js</li>
-                  <li>Python</li>
-                  <li>SQL</li>
-                  <li>GitHub / Docker</li>
+                  <li class="reveal">JavaScript / Node.js</li>
+                  <li class="reveal">Python</li>
+                  <li class="reveal">SQL</li>
+                  <li class="reveal">GitHub / Docker</li>
                 </ul>
               </div>
-              <div class="block">
+              <div class="block reveal">
                 <h4>Research & Creative</h4>
                 <ul>
-                  <li>Qualitative Methods</li>
-                  <li>Thematic Analysis</li>
-                  <li>Photography</li>
-                  <li>Video Editing</li>
+                  <li class="reveal">Qualitative Methods</li>
+                  <li class="reveal">Thematic Analysis</li>
+                  <li class="reveal">Photography</li>
+                  <li class="reveal">Video Editing</li>
                 </ul>
               </div>
             </div>
@@ -852,6 +1046,33 @@
   </div>
 
   <script>
+    // Loading polish: fade + slide the card in once everything is ready.
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => document.body.classList.add('loaded'));
+    });
+
+    // Scroll-in reveal for elements within each section (staggered).
+    const revealEls = document.querySelectorAll('.reveal');
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 8) * 60}ms`;
+    });
+
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .15 });
+
+      revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+      // Fallback: just show everything if IntersectionObserver isn't supported.
+      revealEls.forEach(el => el.classList.add('in-view'));
+    }
+
     const buttons = document.querySelectorAll('.nav button');
     const sections = document.querySelectorAll('.section');
 
