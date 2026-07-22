@@ -279,6 +279,161 @@
       font-weight:600;
     }
 
+    /* Timeline Styles */
+    .timeline-container{
+      position:relative;
+      padding:0;
+    }
+
+    .timeline-line{
+      position:absolute;
+      left:24px;
+      top:0;
+      bottom:0;
+      width:2px;
+      background:linear-gradient(180deg,var(--gold),var(--border));
+    }
+
+    .timeline-items{
+      display:grid;
+      gap:32px;
+      padding-left:0;
+    }
+
+    .timeline-item{
+      position:relative;
+      padding-left:80px;
+      cursor:pointer;
+    }
+
+    .timeline-dot{
+      position:absolute;
+      left:0;
+      top:6px;
+      width:48px;
+      height:48px;
+      background:var(--panel);
+      border:3px solid var(--gold);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      font-weight:700;
+      font-size:.9rem;
+      transition:.3s ease;
+      box-shadow:0 4px 12px rgba(201,169,97,.2);
+    }
+
+    .timeline-item:hover .timeline-dot{
+      transform:scale(1.15);
+      box-shadow:0 8px 24px rgba(201,169,97,.3);
+      background:var(--gold);
+      color:var(--panel);
+    }
+
+    .timeline-title{
+      font-size:1.05rem;
+      font-weight:600;
+      color:var(--accent);
+      margin:0 0 4px;
+      transition:.2s ease;
+    }
+
+    .timeline-item:hover .timeline-title{
+      color:var(--gold);
+    }
+
+    .timeline-meta{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:8px;
+      font-weight:500;
+    }
+
+    .timeline-content{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease, opacity .3s ease;
+      opacity:0;
+    }
+
+    .timeline-item.active .timeline-content{
+      max-height:500px;
+      opacity:1;
+      animation:slideDown .3s ease;
+    }
+
+    @keyframes slideDown{
+      from{
+        opacity:0;
+        transform:translateY(-8px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .timeline-description{
+      background:rgba(201,169,97,.05);
+      border-left:3px solid var(--gold);
+      border-radius:8px;
+      padding:12px 16px;
+      font-size:.9rem;
+      line-height:1.65;
+      color:var(--text);
+      margin-top:8px;
+    }
+
+    .timeline-description p{
+      margin:0 0 6px;
+    }
+
+    .timeline-description p:last-child{
+      margin-bottom:0;
+    }
+
+    .timeline-description strong{
+      color:var(--accent);
+      font-weight:600;
+    }
+
+    .timeline-description .location{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .timeline-description .skills{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-top:8px;
+      padding-top:8px;
+      border-top:1px solid rgba(201,169,97,.2);
+    }
+
+    .timeline-description .role{
+      color:var(--gold);
+      font-weight:600;
+      display:block;
+      margin-top:8px;
+      padding-top:8px;
+      border-top:1px solid rgba(201,169,97,.2);
+    }
+
+    .timeline-description a{
+      color:var(--gold);
+      text-decoration:none;
+      font-weight:500;
+      transition:.2s;
+    }
+
+    .timeline-description a:hover{
+      text-decoration:underline;
+    }
+
+    /* Old timeline items for other sections */
     .timeline{
       display:grid;
       gap:20px;
@@ -378,6 +533,20 @@
       .about,.blocks{grid-template-columns:1fr}
       .content{padding:32px 28px}
       .wrap{padding:28px 16px}
+      
+      .timeline-dot{
+        width:40px;
+        height:40px;
+        font-size:.8rem;
+      }
+      
+      .timeline-item{
+        padding-left:70px;
+      }
+      
+      .timeline-line{
+        left:20px;
+      }
     }
   </style>
 </head>
@@ -424,16 +593,101 @@
           <section class="section" id="experience">
             <h2>Experience</h2>
             <div class="section-bar"></div>
-            <div class="timeline">
-              <div class="item">
-                <div class="meta">2023 — Present</div>
-                <h3>Software Developer</h3>
-                <p>Developed web features, automation workflows, and AI-assisted development processes with emphasis on quality and maintainability.</p>
-              </div>
-              <div class="item">
-                <div class="meta">Previously</div>
-                <h3>Video / Web / Marketing</h3>
-                <p>Worked in content production, video editing, web development, and digital marketing, combining technical and creative skills.</p>
+            <div class="timeline-container">
+              <div class="timeline-line"></div>
+              <div class="timeline-items">
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">1</div>
+                  <div class="timeline-title">Entrepreneur / Business Owner</div>
+                  <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>House Painting & Façade Maintenance</strong></p>
+                      <p class="location">Central Finland, Finland</p>
+                      <p>Founded and grew a house painting business specializing in façade maintenance painting (Julkisivun huoltomaalaukset). Employed approximately 15 seasonal workers. Managed all operations from client acquisition to project delivery. Left the business in good hands to focus on university studies and other freelance projects.</p>
+                      <span class="role"><strong>Full-time:</strong> May 2021 - Jan 2024 (2 yrs 9 mos)</span>
+                      <span class="role"><strong>Self-employed:</strong> Apr 2017 - Jan 2024 (6 yrs 10 mos)</span>
+                      <p class="skills"><strong>Skills:</strong> Social Media Marketing, Business Planning, Project Management, Organization Skills, Team Leadership, Business Operations</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">2</div>
+                  <div class="timeline-title">Sales</div>
+                  <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Telephone Subscriptions & Maintenance</strong></p>
+                      <p class="location">Central Finland, Finland</p>
+                      <p>Sale of telephone subscriptions and telephone maintenance.</p>
+                      <p class="skills"><strong>Skills:</strong> Sales, Phone Repair</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">3</div>
+                  <div class="timeline-title">Sales</div>
+                  <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Point of Sale Manager</strong></p>
+                      <p>The person in charge of the point of sale.</p>
+                      <p class="skills"><strong>Skills:</strong> Team Management</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">4</div>
+                  <div class="timeline-title">Customer Procurer for Sales</div>
+                  <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Sales Coordination</strong></p>
+                      <p>Arranging sales meetings.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">5</div>
+                  <div class="timeline-title">House Painter</div>
+                  <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Summer Job</strong></p>
+                      <p>Painting houses, summer job.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">6</div>
+                  <div class="timeline-title">House Painter</div>
+                  <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Summer Job</strong></p>
+                      <p>Outdoor house painting, summer job.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" onclick="toggleTimeline(event)">
+                  <div class="timeline-dot">7</div>
+                  <div class="timeline-title">Construction Worker</div>
+                  <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
+                  <div class="timeline-content">
+                    <div class="timeline-description">
+                      <p><strong>Various Construction Tasks</strong></p>
+                      <p class="location">Central Finland, Finland</p>
+                      <p>Different part-time jobs as construction worker etc.</p>
+                      <p class="skills"><strong>Skills:</strong> Construction</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -448,7 +702,7 @@
                 <p><strong>University of Jyväskylä</strong></p>
                 
                 <div class="thesis">
-                  <p><strong>Bachelor's Thesis:</strong> The utilization of artificial intelligence along the consumer's customer journey (Grade: 5)</p>
+                  <p><strong>Bachelor's Thesis:</strong> AI Utilization in Consumer Customer Journey (Grade: 5)</p>
                   <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Read thesis →</a></p>
                 </div>
 
@@ -465,15 +719,21 @@
             <div class="section-bar"></div>
             <div class="blocks">
               <div class="block">
-                <h4>Vuorovaikutustaidot</h4>
+                <h4>Software Development</h4>
                 <ul>
-                  <li>Olen työskennellyt koko ikäni erilaisissa vahvoja myynti- ja asiakaspalvelutaitoja vaativissa tehtävissä.</li>
+                  <li>JavaScript / Node.js</li>
+                  <li>Python</li>
+                  <li>SQL</li>
+                  <li>GitHub / Docker</li>
                 </ul>
               </div>
               <div class="block">
-                <h4>Ongelmanratkaisukyvyt</h4>
+                <h4>Research & Creative</h4>
                 <ul>
-                  <li>Yrittäjänä ja tiiminvetäjänä olen tottunut ottamaan vastuuta projektien eteenpäin viemisestä haastavissakin tilanteissa</li>
+                  <li>Qualitative Methods</li>
+                  <li>Thematic Analysis</li>
+                  <li>Photography</li>
+                  <li>Video Editing</li>
                 </ul>
               </div>
             </div>
@@ -493,6 +753,29 @@
       btn.classList.add('active');
       document.getElementById(btn.dataset.target).classList.add('active');
     }));
+
+    function toggleTimeline(event) {
+      const timelineItem = event.currentTarget;
+      
+      // Close all other items
+      document.querySelectorAll('.timeline-item').forEach(item => {
+        if (item !== timelineItem) {
+          item.classList.remove('active');
+        }
+      });
+      
+      // Toggle current item
+      timelineItem.classList.toggle('active');
+    }
+
+    // Close timeline item when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.timeline-item')) {
+        document.querySelectorAll('.timeline-item').forEach(item => {
+          item.classList.remove('active');
+        });
+      }
+    });
   </script>
 </body>
 </html>
