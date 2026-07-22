@@ -279,7 +279,31 @@
       font-weight:600;
     }
 
-    /* Timeline Styles */
+    /* Dual Timeline Styles */
+    .dual-timeline-wrapper{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:48px;
+      position:relative;
+    }
+
+    .timeline-section h3{
+      font-size:.95rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      margin:0 0 24px;
+      padding-bottom:12px;
+      border-bottom:2px solid var(--gold);
+      color:var(--accent);
+    }
+
+    .timeline-section.education h3{
+      border-bottom-color:#d0d0d0;
+      color:var(--muted);
+    }
+
+    /* Work Timeline */
     .timeline-container{
       position:relative;
       padding:0;
@@ -433,7 +457,55 @@
       text-decoration:underline;
     }
 
-    /* Old timeline items for other sections */
+    /* Education Timeline - Greyed Out */
+    .timeline-container.education{
+      position:relative;
+      padding:0;
+    }
+
+    .timeline-line.education{
+      background:linear-gradient(180deg,#d0d0d0,#e8e8e8);
+    }
+
+    .timeline-item.education{
+      cursor:pointer;
+    }
+
+    .timeline-dot.education{
+      border-color:#d0d0d0;
+      color:#d0d0d0;
+      box-shadow:0 4px 12px rgba(0,0,0,.08);
+    }
+
+    .timeline-item.education:hover .timeline-dot{
+      transform:scale(1.15);
+      box-shadow:0 8px 24px rgba(0,0,0,.12);
+      background:#d0d0d0;
+      color:var(--panel);
+    }
+
+    .timeline-title.education{
+      color:var(--muted);
+    }
+
+    .timeline-item.education:hover .timeline-title{
+      color:var(--accent);
+    }
+
+    .timeline-description.education{
+      background:rgba(200,200,200,.08);
+      border-left-color:#d0d0d0;
+    }
+
+    .timeline-description.education strong{
+      color:var(--accent);
+    }
+
+    .timeline-description.education .skills{
+      border-top-color:rgba(200,200,200,.2);
+    }
+
+    /* Old timeline items for education section */
     .timeline{
       display:grid;
       gap:20px;
@@ -524,6 +596,13 @@
       text-decoration:underline;
     }
 
+    @media (max-width: 1200px){
+      .dual-timeline-wrapper{
+        grid-template-columns:1fr;
+        gap:32px;
+      }
+    }
+
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
       .side{
@@ -593,98 +672,126 @@
           <section class="section" id="experience">
             <h2>Experience</h2>
             <div class="section-bar"></div>
-            <div class="timeline-container">
-              <div class="timeline-line"></div>
-              <div class="timeline-items">
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">1</div>
-                  <div class="timeline-title">Entrepreneur / Business Owner</div>
-                  <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>House Painting & Façade Maintenance</strong></p>
-                      <p class="location">Central Finland, Finland</p>
-                      <p>Founded and grew a house painting business specializing in façade maintenance painting (Julkisivun huoltomaalaukset). Employed approximately 15 seasonal workers. Managed all operations from client acquisition to project delivery. Left the business in good hands to focus on university studies and other freelance projects.</p>
-                      <span class="role"><strong>Full-time:</strong> May 2021 - Jan 2024 (2 yrs 9 mos)</span>
-                      <span class="role"><strong>Self-employed:</strong> Apr 2017 - Jan 2024 (6 yrs 10 mos)</span>
-                      <p class="skills"><strong>Skills:</strong> Social Media Marketing, Business Planning, Project Management, Organization Skills, Team Leadership, Business Operations</p>
+            <div class="dual-timeline-wrapper">
+              <!-- Work Experience Timeline -->
+              <div class="timeline-section work">
+                <h3>Work Experience</h3>
+                <div class="timeline-container">
+                  <div class="timeline-line"></div>
+                  <div class="timeline-items">
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">1</div>
+                      <div class="timeline-title">Entrepreneur / Business Owner</div>
+                      <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>House Painting & Façade Maintenance</strong></p>
+                          <p class="location">Central Finland, Finland</p>
+                          <p>Founded and grew a house painting business specializing in façade maintenance painting (Julkisivun huoltomaalaukset). Employed approximately 15 seasonal workers. Managed all operations from client acquisition to project delivery. Left the business in good hands to focus on university studies and other freelance projects.</p>
+                          <span class="role"><strong>Full-time:</strong> May 2021 - Jan 2024 (2 yrs 9 mos)</span>
+                          <span class="role"><strong>Self-employed:</strong> Apr 2017 - Jan 2024 (6 yrs 10 mos)</span>
+                          <p class="skills"><strong>Skills:</strong> Social Media Marketing, Business Planning, Project Management, Organization Skills, Team Leadership, Business Operations</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">2</div>
+                      <div class="timeline-title">Sales</div>
+                      <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Telephone Subscriptions & Maintenance</strong></p>
+                          <p class="location">Central Finland, Finland</p>
+                          <p>Sale of telephone subscriptions and telephone maintenance.</p>
+                          <p class="skills"><strong>Skills:</strong> Sales, Phone Repair</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">3</div>
+                      <div class="timeline-title">Sales</div>
+                      <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Point of Sale Manager</strong></p>
+                          <p>The person in charge of the point of sale.</p>
+                          <p class="skills"><strong>Skills:</strong> Team Management</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">4</div>
+                      <div class="timeline-title">Customer Procurer for Sales</div>
+                      <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Sales Coordination</strong></p>
+                          <p>Arranging sales meetings.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">5</div>
+                      <div class="timeline-title">House Painter</div>
+                      <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Summer Job</strong></p>
+                          <p>Painting houses, summer job.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">6</div>
+                      <div class="timeline-title">House Painter</div>
+                      <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Summer Job</strong></p>
+                          <p>Outdoor house painting, summer job.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot">7</div>
+                      <div class="timeline-title">Construction Worker</div>
+                      <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description">
+                          <p><strong>Various Construction Tasks</strong></p>
+                          <p class="location">Central Finland, Finland</p>
+                          <p>Different part-time jobs as construction worker etc.</p>
+                          <p class="skills"><strong>Skills:</strong> Construction</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">2</div>
-                  <div class="timeline-title">Sales</div>
-                  <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Telephone Subscriptions & Maintenance</strong></p>
-                      <p class="location">Central Finland, Finland</p>
-                      <p>Sale of telephone subscriptions and telephone maintenance.</p>
-                      <p class="skills"><strong>Skills:</strong> Sales, Phone Repair</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">3</div>
-                  <div class="timeline-title">Sales</div>
-                  <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Point of Sale Manager</strong></p>
-                      <p>The person in charge of the point of sale.</p>
-                      <p class="skills"><strong>Skills:</strong> Team Management</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">4</div>
-                  <div class="timeline-title">Customer Procurer for Sales</div>
-                  <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Sales Coordination</strong></p>
-                      <p>Arranging sales meetings.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">5</div>
-                  <div class="timeline-title">House Painter</div>
-                  <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Summer Job</strong></p>
-                      <p>Painting houses, summer job.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">6</div>
-                  <div class="timeline-title">House Painter</div>
-                  <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Summer Job</strong></p>
-                      <p>Outdoor house painting, summer job.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item" onclick="toggleTimeline(event)">
-                  <div class="timeline-dot">7</div>
-                  <div class="timeline-title">Construction Worker</div>
-                  <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
-                  <div class="timeline-content">
-                    <div class="timeline-description">
-                      <p><strong>Various Construction Tasks</strong></p>
-                      <p class="location">Central Finland, Finland</p>
-                      <p>Different part-time jobs as construction worker etc.</p>
-                      <p class="skills"><strong>Skills:</strong> Construction</p>
+              <!-- Education Timeline -->
+              <div class="timeline-section education">
+                <h3>Education</h3>
+                <div class="timeline-container education">
+                  <div class="timeline-line education"></div>
+                  <div class="timeline-items">
+                    <div class="timeline-item education" onclick="toggleTimeline(event)">
+                      <div class="timeline-dot education">📚</div>
+                      <div class="timeline-title education">Master's Degree</div>
+                      <div class="timeline-meta">University of Jyväskylä · Feb 2021 - May 2026</div>
+                      <div class="timeline-content">
+                        <div class="timeline-description education">
+                          <p><strong>Master's in Information Systems</strong></p>
+                          <p>Focus on Information Systems, studying AI, generative technologies, and their impact on software development.</p>
+                          <p class="skills"><strong>Field:</strong> Information Systems</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -757,8 +864,9 @@
     function toggleTimeline(event) {
       const timelineItem = event.currentTarget;
       
-      // Close all other items
-      document.querySelectorAll('.timeline-item').forEach(item => {
+      // Close all other items in the same timeline
+      const timelineContainer = timelineItem.closest('.timeline-container');
+      timelineContainer.querySelectorAll('.timeline-item').forEach(item => {
         if (item !== timelineItem) {
           item.classList.remove('active');
         }
