@@ -382,6 +382,7 @@
       opacity:0;
     }
 
+    .timeline-item:hover .timeline-content,
     .timeline-item.active .timeline-content{
       max-height:500px;
       opacity:1;
@@ -679,7 +680,7 @@
                 <div class="timeline-container">
                   <div class="timeline-line"></div>
                   <div class="timeline-items">
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">1</div>
                       <div class="timeline-title">Entrepreneur / Business Owner</div>
                       <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
@@ -695,7 +696,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">2</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
@@ -709,7 +710,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">3</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
@@ -722,7 +723,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">4</div>
                       <div class="timeline-title">Customer Procurer for Sales</div>
                       <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
@@ -734,7 +735,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">5</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
@@ -746,7 +747,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">6</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
@@ -758,7 +759,7 @@
                       </div>
                     </div>
 
-                    <div class="timeline-item" onclick="toggleTimeline(event)">
+                    <div class="timeline-item">
                       <div class="timeline-dot">7</div>
                       <div class="timeline-title">Construction Worker</div>
                       <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
@@ -781,7 +782,7 @@
                 <div class="timeline-container education">
                   <div class="timeline-line education"></div>
                   <div class="timeline-items">
-                    <div class="timeline-item education" onclick="toggleTimeline(event)">
+                    <div class="timeline-item education">
                       <div class="timeline-dot education">📚</div>
                       <div class="timeline-title education">Master's Degree</div>
                       <div class="timeline-meta">University of Jyväskylä · Feb 2021 - May 2026</div>
@@ -861,28 +862,18 @@
       document.getElementById(btn.dataset.target).classList.add('active');
     }));
 
-    function toggleTimeline(event) {
-      const timelineItem = event.currentTarget;
-      
-      // Close all other items in the same timeline
-      const timelineContainer = timelineItem.closest('.timeline-container');
-      timelineContainer.querySelectorAll('.timeline-item').forEach(item => {
-        if (item !== timelineItem) {
-          item.classList.remove('active');
+    // Timeline items now expand on hover via CSS (see .timeline-item:hover .timeline-content).
+    // On touch devices without hover, tapping still toggles the "active" class as a fallback.
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      item.addEventListener('click', (event) => {
+        if (window.matchMedia('(hover: none)').matches) {
+          const timelineContainer = item.closest('.timeline-container');
+          timelineContainer.querySelectorAll('.timeline-item').forEach(other => {
+            if (other !== item) other.classList.remove('active');
+          });
+          item.classList.toggle('active');
         }
       });
-      
-      // Toggle current item
-      timelineItem.classList.toggle('active');
-    }
-
-    // Close timeline item when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!event.target.closest('.timeline-item')) {
-        document.querySelectorAll('.timeline-item').forEach(item => {
-          item.classList.remove('active');
-        });
-      }
     });
   </script>
 </body>
