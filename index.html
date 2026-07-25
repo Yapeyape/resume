@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fi">
 <head>
@@ -434,7 +435,7 @@
       justify-content:center;
       color:var(--gold);
       font-weight:700;
-      font-size:.9rem;
+      font-size:1.15rem;
       transition:.3s ease;
       box-shadow:0 4px 12px rgba(201,169,97,.2);
     }
@@ -726,6 +727,19 @@
       width:100%;
     }
 
+    /* Desktop: education column sits alone with room to spare, so keep it
+       open instead of requiring hover (matches the two-column breakpoint below) */
+    @media (min-width: 1201px){
+      .timeline-item.education .timeline-content{
+        max-height:500px;
+        opacity:1;
+      }
+
+      .timeline-item.education{
+        cursor:default;
+      }
+    }
+
     @media (max-width: 1200px){
       .dual-timeline-wrapper{
         grid-template-columns:1fr;
@@ -875,7 +889,7 @@
                   <div class="timeline-line"></div>
                   <div class="timeline-items">
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">1</div>
+                      <div class="timeline-dot">🏠</div>
                       <div class="timeline-title">Entrepreneur / Business Owner</div>
                       <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
                       <div class="timeline-content">
@@ -891,7 +905,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">2</div>
+                      <div class="timeline-dot">📈</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
                       <div class="timeline-content">
@@ -905,7 +919,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">3</div>
+                      <div class="timeline-dot">📈</div>
                       <div class="timeline-title">Sales</div>
                       <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 · 1 yr 2 mos</div>
                       <div class="timeline-content">
@@ -918,7 +932,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">4</div>
+                      <div class="timeline-dot">🤝</div>
                       <div class="timeline-title">Customer Procurer for Sales</div>
                       <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 · 7 mos</div>
                       <div class="timeline-content">
@@ -930,7 +944,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">5</div>
+                      <div class="timeline-dot">🖌️</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 · 3 mos</div>
                       <div class="timeline-content">
@@ -942,7 +956,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">6</div>
+                      <div class="timeline-dot">🖌️</div>
                       <div class="timeline-title">House Painter</div>
                       <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 · 2 mos</div>
                       <div class="timeline-content">
@@ -954,7 +968,7 @@
                     </div>
 
                     <div class="timeline-item reveal">
-                      <div class="timeline-dot">7</div>
+                      <div class="timeline-dot">🧱</div>
                       <div class="timeline-title">Construction Worker</div>
                       <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 · 2 yrs 3 mos</div>
                       <div class="timeline-content">
