@@ -313,18 +313,18 @@
     .lead p{margin:0 0 18px}
     .lead p:last-child{margin-bottom:0}
 
-    .portrait{
-      width:100%;
-      display:block;
-      height:auto;
-      aspect-ratio:auto;
-      border-radius:16px;
-      object-fit:contain;
-      box-shadow:0 16px 48px rgba(0,0,0,.15);
-      filter:grayscale(.3) contrast(1.05) brightness(.98);
-      border:1px solid var(--border);
-      background:transparent;
-    }
+.portrait{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+  object-position:center top;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
 
     .blocks{
       display:grid;
