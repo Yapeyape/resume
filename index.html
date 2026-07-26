@@ -382,7 +382,7 @@
       font-weight:600;
     }
 
-    /* Latest project showcase (Skills tab) */
+    /* Latest projects showcase (Skills tab) — horizontally swipeable carousel */
     .project-showcase{
       margin-top:32px;
     }
@@ -405,13 +405,134 @@
       margin:0 0 20px;
     }
 
-    .project-video{
+    .project-carousel-wrap{
+      position:relative;
+    }
+
+    .project-carousel{
+      display:flex;
+      gap:20px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:4px 4px 16px;
+      scrollbar-width:thin;
+      scrollbar-color:var(--gold) transparent;
+    }
+
+    .project-carousel::-webkit-scrollbar{
+      height:6px;
+    }
+
+    .project-carousel::-webkit-scrollbar-track{
+      background:transparent;
+    }
+
+    .project-carousel::-webkit-scrollbar-thumb{
+      background:var(--gold);
+      border-radius:4px;
+    }
+
+    .project-card{
+      flex:0 0 300px;
+      scroll-snap-align:start;
+      background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(250,250,248,.65));
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 4px 16px rgba(0,0,0,.04);
+      transition:.3s ease;
+    }
+
+    .project-card:hover{
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      border-color:var(--gold);
+    }
+
+    .project-media{
       display:block;
       width:100%;
-      border-radius:16px;
-      border:1px solid var(--border);
-      box-shadow:0 16px 48px rgba(0,0,0,.15);
+      height:190px;
+      object-fit:cover;
       background:#000;
+    }
+
+    .project-media-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:2px;
+    }
+
+    .project-media-thumb{
+      display:block;
+      width:100%;
+      height:190px;
+      object-fit:cover;
+    }
+
+    .project-card-body{
+      padding:16px 18px;
+    }
+
+    .project-card-body h5{
+      margin:0 0 6px;
+      font-size:.95rem;
+      font-weight:700;
+      color:var(--accent);
+    }
+
+    .project-card-body p{
+      margin:0;
+      font-size:.85rem;
+      line-height:1.55;
+      color:var(--muted);
+    }
+
+    .carousel-arrow{
+      position:absolute;
+      top:calc(50% - 12px);
+      transform:translateY(-50%);
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--panel);
+      border:1px solid var(--border);
+      color:var(--gold);
+      font-size:1.2rem;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 4px 12px rgba(0,0,0,.1);
+      z-index:2;
+      transition:.2s ease;
+      appearance:none;
+      padding:0;
+    }
+
+    .carousel-arrow:hover{
+      background:var(--gold);
+      color:var(--panel);
+      border-color:var(--gold);
+    }
+
+    .carousel-arrow.prev{
+      left:-6px;
+    }
+
+    .carousel-arrow.next{
+      right:-6px;
+    }
+
+    @media (max-width: 700px){
+      .carousel-arrow{
+        display:none;
+      }
+
+      .project-card{
+        flex-basis:78vw;
+      }
     }
 
     /* Dual Timeline Styles */
@@ -1057,7 +1178,7 @@
         overflow:visible!important;
         padding:6px 0 0;
       }
-      .project-video{display:none}
+      .project-carousel-wrap{display:none}
     }
   </style>
   <noscript><style>.card{opacity:1!important;transform:none!important}</style></noscript>
@@ -1338,12 +1459,45 @@
             </div>
 
             <div class="project-showcase reveal">
-              <h4 class="project-showcase-title">Check my latest project</h4>
-              <p>A walkthrough of a recent kitchen renovation project — from concept to the finished space, showcasing the design and craftsmanship.</p>
-              <video class="project-video" controls playsinline preload="metadata">
-                <source src="Keitti%C3%B6visu.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <h4 class="project-showcase-title">Check my latest projects</h4>
+              <p>A few recent projects — swipe or use the arrows to browse.</p>
+              <div class="project-carousel-wrap">
+                <button class="carousel-arrow prev" id="carouselPrev" aria-label="Scroll left">‹</button>
+
+                <div class="project-carousel" id="projectCarousel">
+                  <div class="project-card">
+                    <video class="project-media" controls playsinline preload="metadata">
+                      <source src="Keitti%C3%B6visu.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <div class="project-card-body">
+                      <h5>Kitchen Renovation Visual</h5>
+                      <p>A walkthrough of a recent kitchen renovation project — from concept to the finished space.</p>
+                    </div>
+                  </div>
+
+                  <div class="project-card">
+                    <div class="project-media-grid">
+                      <img src="wordpress1.png" alt="High ranking website example 1" class="project-media-thumb">
+                      <img src="wordpress2.png" alt="High ranking website example 2" class="project-media-thumb">
+                    </div>
+                    <div class="project-card-body">
+                      <h5>High Ranking Websites</h5>
+                      <p>WordPress websites built and optimized to rank highly in search results.</p>
+                    </div>
+                  </div>
+
+                  <div class="project-card">
+                    <img src="content.png" alt="Media content creation example" class="project-media">
+                    <div class="project-card-body">
+                      <h5>Media Content Creation</h5>
+                      <p>Social media content creation and account management for business clients.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="carousel-arrow next" id="carouselNext" aria-label="Scroll right">›</button>
+              </div>
             </div>
           </section>
         </main>
@@ -1394,6 +1548,24 @@
       coursesToggle.addEventListener('click', () => {
         const isOpen = coursesBlock.classList.toggle('open');
         coursesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    // Project carousel (Skills tab) — arrow buttons scroll the swipeable list
+    const projectCarousel = document.getElementById('projectCarousel');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    if (projectCarousel && carouselPrev && carouselNext) {
+      const scrollByCard = () => {
+        const card = projectCarousel.querySelector('.project-card');
+        const gap = 20;
+        return card ? card.getBoundingClientRect().width + gap : 320;
+      };
+      carouselPrev.addEventListener('click', () => {
+        projectCarousel.scrollBy({ left: -scrollByCard(), behavior: 'smooth' });
+      });
+      carouselNext.addEventListener('click', () => {
+        projectCarousel.scrollBy({ left: scrollByCard(), behavior: 'smooth' });
       });
     }
 
