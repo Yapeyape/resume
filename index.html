@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fi">
 <head>
@@ -379,6 +380,38 @@
       left:0;
       color:var(--gold);
       font-weight:600;
+    }
+
+    /* Latest project showcase (Skills tab) */
+    .project-showcase{
+      margin-top:32px;
+    }
+
+    .project-showcase-title{
+      font-size:.95rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      margin:0 0 16px;
+      padding-bottom:12px;
+      border-bottom:2px solid var(--gold);
+      color:var(--accent);
+    }
+
+    .project-showcase p{
+      color:var(--text);
+      line-height:1.7;
+      font-size:.95rem;
+      margin:0 0 20px;
+    }
+
+    .project-video{
+      display:block;
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--border);
+      box-shadow:0 16px 48px rgba(0,0,0,.15);
+      background:#000;
     }
 
     /* Dual Timeline Styles */
@@ -899,9 +932,6 @@
           "side"
           "content"
           "contact";
-        .about,.blocks{grid-template-columns:1fr}
-        .about .portrait{order:1;width:70%;margin:0 auto 18px}
-        .about .lead{order:2}
       }
       .side{
         padding:32px 28px 24px;
@@ -915,6 +945,8 @@
         border-top:1px solid var(--border);
       }
       .about,.blocks{grid-template-columns:1fr}
+      .about .portrait{order:1;width:70%;margin:0 auto 18px}
+      .about .lead{order:2}
       .content{padding:32px 28px}
       .wrap{padding:28px 16px}
       
@@ -1025,6 +1057,7 @@
         overflow:visible!important;
         padding:6px 0 0;
       }
+      .project-video{display:none}
     }
   </style>
   <noscript><style>.card{opacity:1!important;transform:none!important}</style></noscript>
@@ -1056,11 +1089,9 @@
             <div class="about">
               <div class="lead">
           
-                <p class="reveal">I'm a 27-year-old freshly graduated Master of Science (Economics and Business
-Administration, main field of studies was Information Systems) with a passion for digital services, data, and visual design. </p>
-                <p class="reveal">I am a person with a strong work ethic and an enthusiastic, proactive attitude looking for new challenges! </p>
-                <p class="reveal">I combine studies on information systems, data, marketing and business etc. with hands-on experience in wordpress development, content creation, and business operations. In the past I have worked in many sales, customer service, and customer acquisition roles.  </p>
-                <p class="reveal">Outside of work, I spend time with my people and engage in a lot of sports and sometimes though too rarely express my creativity through photography and editing. </p>
+                <p class="reveal">I'm a 27-year-old recent graduate with an M.Sc. in Information Systems from the University of Jyväskylä, where my thesis examined how software developers experience generative AI tools. Before and during my studies, I founded and ran a house painting business that grew to 10+ seasonal employees and nearly €300k in turnover — experience that taught me project management, client acquisition, and leading a team from the ground up.</p>
+                <p class="reveal">I combine that hands-on business background with technical skills in WordPress development, data, and digital services, alongside earlier experience in sales, customer service, and customer acquisition. I'm drawn to work at the intersection of digital services, data, and visual design — where technical thinking meets strong execution.</p>
+                <p class="reveal">Outside of work, I spend time with family and friends, stay active through sports, and enjoy photography and video editing when I get the chance.</p>
               </div>
               <img class="portrait reveal" src="Jasper_Anttila.webp" alt="Professional portrait">
             </div>
@@ -1304,6 +1335,15 @@ Administration, main field of studies was Information Systems) with a passion fo
                   <li class="reveal">Video Editing</li>
                 </ul>
               </div>
+            </div>
+
+            <div class="project-showcase reveal">
+              <h4 class="project-showcase-title">Check my latest project</h4>
+              <p>A walkthrough of a recent kitchen renovation project — from concept to the finished space, showcasing the design and craftsmanship.</p>
+              <video class="project-video" controls playsinline preload="metadata">
+                <source src="Keitti%C3%B6visu.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
             </div>
           </section>
         </main>
