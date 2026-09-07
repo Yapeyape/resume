@@ -4,1597 +4,293 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jasper Anttila | Premium Resume</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#fafaf8;
-      --panel:#ffffff;
-      --accent:#1a1a1a;
-      --gold:#c9a961;
-      --text:#2a2a2a;
-      --muted:#6b6b6b;
-      --border:#e8e8e5;
-      --shadow:0 8px 32px rgba(0,0,0,.08);
-      --shadow-lg:0 20px 60px rgba(0,0,0,.12);
-    }
-
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:Inter,system-ui,sans-serif;
-      background:#fafaf8;
-      color:var(--text);
-      overflow-x:hidden;
-    }
-
-    .bg-mesh{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      overflow:hidden;
-      background:linear-gradient(135deg,#fafaf8 0,#f5f3f0 100%);
-    }
-
-    .bg-mesh::before,
-    .bg-mesh::after{
-      content:'';
-      position:absolute;
-      width:min(60vw,700px);
-      height:min(60vw,700px);
-      border-radius:50%;
-      filter:blur(90px);
-      opacity:.4;
-      animation:drift 24s ease-in-out infinite alternate;
-      will-change:transform;
-    }
-
-    .bg-mesh::before{
-      top:-15%;
-      left:-12%;
-      background:radial-gradient(circle at 30% 30%,rgba(201,169,97,.55),transparent 70%);
-    }
-
-    .bg-mesh::after{
-      bottom:-18%;
-      right:-12%;
-      background:radial-gradient(circle at 60% 60%,rgba(26,26,26,.1),transparent 70%);
-      animation-delay:-12s;
-    }
-
-    .bg-mesh .noise{
-      position:absolute;
-      inset:0;
-      opacity:.03;
-      mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    }
-
-    @keyframes drift{
-      from{transform:translate(0,0) scale(1)}
-      to{transform:translate(4%,6%) scale(1.08)}
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .bg-mesh::before,
-      .bg-mesh::after{animation:none}
-    }
-
-    .wrap{
-      max-width:1000px;
-      margin:0 auto;
-      padding:40px 24px;
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow-lg);
-      border-radius:24px;
-      overflow:hidden;
-      opacity:0;
-      transform:translateY(18px);
-      transition:opacity .7s ease, transform .7s ease;
-    }
-
-    body.loaded .card{
-      opacity:1;
-      transform:none;
-    }
-
-    noscript .card,
-    .no-js .card{
-      opacity:1 !important;
-      transform:none !important;
-    }
-
-    .hero{
-      padding:56px 48px 32px;
-      text-align:center;
-      border-bottom:2px solid var(--border);
-      position:relative;
-    }
-
-    .hero::before{
-      content:'';
-      position:absolute;
-      top:0;
-      left:0;
-      right:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,var(--gold),transparent);
-    }
-
-    .hero h1{
-      margin:0;
-      font-family:Playfair Display,serif;
-      font-size:clamp(2.4rem,5vw,3.8rem);
-      font-weight:700;
-      letter-spacing:-.02em;
-      color:var(--accent);
-    }
-
-    .hero p{
-      margin:16px 0 0;
-      font-size:.95rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-weight:500;
-      color:var(--muted);
-    }
-
-    .divider{
-      width:48px;
-      height:2px;
-      background:linear-gradient(90deg,var(--gold),transparent);
-      margin:12px auto 0;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:240px 1fr;
-      grid-template-rows:auto 1fr;
-      grid-template-areas:
-        "side content"
-        "contact content";
-      min-height:auto;
-    }
-
-    .side{
-      grid-area:side;
-      padding:40px 28px 0;
-      background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,250,248,.8));
-      border-right:1px solid var(--border);
-    }
-
-    .nav{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      padding-bottom:32px;
-    }
-
-    .nav button{
-      appearance:none;
-      border:0;
-      background:none;
-      padding:12px 14px 12px 16px;
-      text-align:left;
-      font-size:.95rem;
-      letter-spacing:.12em;
-      font-weight:600;
-      color:#888;
-      cursor:pointer;
-      border-left:2px solid transparent;
-      transition:color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
-      border-radius:0 8px 8px 0;
-      text-transform:uppercase;
-    }
-
-    .nav button:hover{
-      color:var(--accent);
-      background:rgba(201,169,97,.04);
-      transform:translateX(4px);
-      box-shadow:0 2px 12px rgba(201,169,97,.18);
-    }
-
-    .nav button.active{
-      transform:none;
-    }
-
-    .nav button.active{
-      color:var(--accent);
-      border-left-color:var(--gold);
-      background:linear-gradient(90deg,rgba(201,169,97,.08),transparent);
-    }
-
-    .contact{
-      grid-area:contact;
-      margin-top:36px;
-      padding:24px 28px 40px;
-      border-top:1px solid var(--border);
-      background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(250,250,248,.8));
-      border-right:1px solid var(--border);
-    }
-
-    .contact h3{
-      margin:0 0 14px;
-      font-size:.8rem;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:var(--gold);
-    }
-
-    .contact p{
-      margin:6px 0;
-      font-size:.9rem;
-      line-height:1.6;
-      color:var(--text);
-    }
-
-    .contact a{
-      position:relative;
-      display:inline-block;
-      color:var(--accent);
-      text-decoration:none;
-      transition:color .2s;
-    }
-
-    .contact a::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-2px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:width .3s ease;
-    }
-
-    .contact a:hover{
-      color:var(--gold);
-    }
-
-    .contact a:hover::after{
-      width:100%;
-    }
-
-    .content{
-      grid-area:content;
-      padding:40px 48px;
-      min-width:0;
-    }
-
-    .section{
-      display:none;
-      animation:fade .3s ease;
-    }
-
-    .section.active{display:block}
-
-    @keyframes fade{
-      from{opacity:0;transform:translateY(4px)}
-      to{opacity:1;transform:none}
-    }
-
-    .section h2{
-      margin:0 0 8px;
-      font-family:Playfair Display,serif;
-      font-size:clamp(1.8rem,3vw,2.6rem);
-      font-weight:700;
-      letter-spacing:-.02em;
-      color:var(--accent);
-    }
-
-    .section-bar{
-      width:56px;
-      height:2px;
-      background:var(--gold);
-      margin-bottom:28px;
-    }
-
-    .about{
-      display:grid;
-      grid-template-columns:1.4fr .95fr;
-      gap:40px;
-      align-items:start;
-    }
-
-    .lead{
-      font-size:1.05rem;
-      line-height:1.8;
-      color:var(--text);
-      max-width:65ch;
-    }
-
-    .lead p{margin:0 0 18px}
-    .lead p:last-child{margin-bottom:0}
-
-.portrait{
-  display:block;
-  width:100%;
-  height:auto;
-  aspect-ratio:auto;
-  object-fit:contain;
-  object-position:center top;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  filter:none !important;
-}
-
-    .blocks{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:20px;
-    }
-
-    .block{
-      background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(250,250,248,.6));
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:24px;
-      box-shadow:0 4px 16px rgba(0,0,0,.04);
-      transition:.3s ease;
-    }
-
-    .block:hover{
-      box-shadow:0 8px 24px rgba(0,0,0,.08);
-      border-color:var(--gold);
-    }
-
-    .block h4{
-      margin:0 0 16px;
-      font-size:.85rem;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:var(--gold);
-    }
-
-    .block p,.block li{
-      margin:0;
-      color:var(--text);
-      line-height:1.7;
-      font-size:.95rem;
-    }
-
-    .block ul{
-      margin:0;
-      padding-left:20px;
-      list-style:none;
-    }
-
-    .block li{
-      position:relative;
-      padding-left:12px;
-      margin-bottom:8px;
-    }
-
-    .block li::before{
-      content:'→';
-      position:absolute;
-      left:0;
-      color:var(--gold);
-      font-weight:600;
-    }
-
-    /* Latest projects showcase (Skills tab) — horizontally swipeable carousel */
-    .project-showcase{
-      margin-top:32px;
-    }
-
-    .project-showcase-title{
-      font-size:.95rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-weight:700;
-      margin:0 0 16px;
-      padding-bottom:12px;
-      border-bottom:2px solid var(--gold);
-      color:var(--accent);
-    }
-
-    .project-showcase p{
-      color:var(--text);
-      line-height:1.7;
-      font-size:.95rem;
-      margin:0 0 20px;
-    }
-
-    .project-carousel-wrap{
-      position:relative;
-      max-width:100%;
-    }
-
-    .project-carousel{
-      display:flex;
-      gap:20px;
-      overflow-x:auto;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      padding:4px 4px 16px;
-      scrollbar-width:thin;
-      scrollbar-color:var(--gold) transparent;
-      min-width:0;
-    }
-
-    .project-carousel::-webkit-scrollbar{
-      height:6px;
-    }
-
-    .project-carousel::-webkit-scrollbar-track{
-      background:transparent;
-    }
-
-    .project-carousel::-webkit-scrollbar-thumb{
-      background:var(--gold);
-      border-radius:4px;
-    }
-
-    .project-card{
-      flex:0 0 300px;
-      scroll-snap-align:start;
-      background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(250,250,248,.65));
-      border:1px solid var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 4px 16px rgba(0,0,0,.04);
-      transition:.3s ease;
-    }
-
-    .project-card:hover{
-      box-shadow:0 8px 24px rgba(0,0,0,.08);
-      border-color:var(--gold);
-    }
-
-    .project-media{
-      display:block;
-      width:100%;
-      height:190px;
-      object-fit:cover;
-      background:#000;
-    }
-
-    .project-media-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:2px;
-    }
-
-    .project-media-thumb{
-      display:block;
-      width:100%;
-      height:190px;
-      object-fit:cover;
-    }
-
-    .project-card-body{
-      padding:16px 18px;
-    }
-
-    .project-card-body h5{
-      margin:0 0 6px;
-      font-size:.95rem;
-      font-weight:700;
-      color:var(--accent);
-    }
-
-    .project-card-body p{
-      margin:0;
-      font-size:.85rem;
-      line-height:1.55;
-      color:var(--muted);
-    }
-
-    .carousel-arrow{
-      position:absolute;
-      top:calc(50% - 12px);
-      transform:translateY(-50%);
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      background:var(--panel);
-      border:1px solid var(--border);
-      color:var(--gold);
-      font-size:1.2rem;
-      line-height:1;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 4px 12px rgba(0,0,0,.1);
-      z-index:2;
-      transition:.2s ease;
-      appearance:none;
-      padding:0;
-    }
-
-    .carousel-arrow:hover{
-      background:var(--gold);
-      color:var(--panel);
-      border-color:var(--gold);
-    }
-
-    .carousel-arrow.prev{
-      left:-6px;
-    }
-
-    .carousel-arrow.next{
-      right:-6px;
-    }
-
-    @media (max-width: 700px){
-      .carousel-arrow{
-        display:none;
-      }
-
-      .project-card{
-        flex-basis:78vw;
-      }
-    }
-
-    /* Dual Timeline Styles */
-    .dual-timeline-wrapper{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:48px;
-      position:relative;
-    }
-
-    .timeline-section h3{
-      font-size:.95rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-weight:700;
-      margin:0 0 24px;
-      padding-bottom:12px;
-      border-bottom:2px solid var(--gold);
-      color:var(--accent);
-    }
-
-    .timeline-section.education h3{
-      border-bottom-color:#d0d0d0;
-      color:var(--muted);
-    }
-
-    /* Work Timeline */
-    .timeline-container{
-      position:relative;
-      padding:0;
-    }
-
-    .timeline-line{
-      position:absolute;
-      left:24px;
-      top:0;
-      bottom:0;
-      width:2px;
-      background:linear-gradient(180deg,var(--gold),var(--border));
-    }
-
-    .timeline-items{
-      display:grid;
-      gap:32px;
-      padding-left:0;
-    }
-
-    .timeline-item{
-      position:relative;
-      padding-left:80px;
-      cursor:pointer;
-    }
-
-    .timeline-dot{
-      position:absolute;
-      left:0;
-      top:6px;
-      width:48px;
-      height:48px;
-      background:var(--panel);
-      border:3px solid var(--gold);
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--gold);
-      font-weight:700;
-      font-size:1.15rem;
-      transition:.3s ease;
-      box-shadow:0 4px 12px rgba(201,169,97,.2);
-    }
-
-    .timeline-item:hover .timeline-dot{
-      transform:scale(1.15);
-      box-shadow:0 8px 24px rgba(201,169,97,.3);
-      background:var(--gold);
-      color:var(--panel);
-    }
-
-    .timeline-title{
-      font-size:1.05rem;
-      font-weight:600;
-      color:var(--accent);
-      margin:0 0 4px;
-      transition:.2s ease;
-    }
-
-    .timeline-item:hover .timeline-title{
-      color:var(--gold);
-    }
-
-    .timeline-meta{
-      font-size:.85rem;
-      color:var(--muted);
-      margin-bottom:8px;
-      font-weight:500;
-    }
-
-    .timeline-content{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height .3s ease, opacity .3s ease;
-      opacity:0;
-    }
-
-    .timeline-item:hover .timeline-content,
-    .timeline-item.active .timeline-content{
-      max-height:500px;
-      opacity:1;
-      animation:slideDown .3s ease;
-    }
-
-    @keyframes slideDown{
-      from{
-        opacity:0;
-        transform:translateY(-8px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    .timeline-description{
-      background:rgba(201,169,97,.05);
-      border-left:3px solid var(--gold);
-      border-radius:8px;
-      padding:12px 16px;
-      font-size:.9rem;
-      line-height:1.65;
-      color:var(--text);
-      margin-top:8px;
-    }
-
-    .timeline-description p{
-      margin:0 0 6px;
-    }
-
-    .timeline-description p:last-child{
-      margin-bottom:0;
-    }
-
-    .timeline-description strong{
-      color:var(--accent);
-      font-weight:600;
-    }
-
-    .timeline-description .location{
-      font-size:.85rem;
-      color:var(--muted);
-      margin-bottom:8px;
-    }
-
-    .timeline-description .skills{
-      font-size:.85rem;
-      color:var(--muted);
-      margin-top:8px;
-      padding-top:8px;
-      border-top:1px solid rgba(201,169,97,.2);
-    }
-
-    .timeline-description .role{
-      color:var(--gold);
-      font-weight:600;
-      display:block;
-      margin-top:8px;
-      padding-top:8px;
-      border-top:1px solid rgba(201,169,97,.2);
-    }
-
-    .timeline-description a{
-      position:relative;
-      display:inline-block;
-      color:var(--gold);
-      text-decoration:none;
-      font-weight:500;
-      transition:color .2s;
-    }
-
-    .timeline-description a::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-1px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:width .3s ease;
-    }
-
-    .timeline-description a:hover::after{
-      width:100%;
-    }
-
-    /* Education Timeline - Greyed Out */
-    .timeline-container.education{
-      position:relative;
-      padding:0;
-    }
-
-    .timeline-line.education{
-      background:linear-gradient(180deg,#d0d0d0,#e8e8e8);
-    }
-
-    .timeline-item.education{
-      cursor:pointer;
-    }
-
-    .timeline-dot.education{
-      border-color:#d0d0d0;
-      color:#d0d0d0;
-      box-shadow:0 4px 12px rgba(0,0,0,.08);
-    }
-
-    .timeline-item.education:hover .timeline-dot{
-      transform:scale(1.15);
-      box-shadow:0 8px 24px rgba(0,0,0,.12);
-      background:#d0d0d0;
-      color:var(--panel);
-    }
-
-    .timeline-title.education{
-      color:var(--muted);
-    }
-
-    .timeline-item.education:hover .timeline-title{
-      color:var(--accent);
-    }
-
-    .timeline-description.education{
-      background:rgba(200,200,200,.08);
-      border-left-color:#d0d0d0;
-    }
-
-    .timeline-description.education strong{
-      color:var(--accent);
-    }
-
-    .timeline-description.education .skills{
-      border-top-color:rgba(200,200,200,.2);
-    }
-
-    /* Old timeline items for education section */
-    .timeline{
-      display:grid;
-      gap:20px;
-    }
-
-    .item{
-      padding:24px;
-      border-left:3px solid var(--gold);
-      background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(250,250,248,.4));
-      border-radius:0 12px 12px 0;
-      border:1px solid var(--border);
-      border-left:3px solid var(--gold);
-      box-shadow:0 2px 8px rgba(0,0,0,.04);
-      transition:.3s ease;
-    }
-
-    .item:hover{
-      box-shadow:0 6px 20px rgba(0,0,0,.08);
-      background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(250,250,248,.6));
-    }
-
-    .item .meta{
-      font-size:.8rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--muted);
-      margin-bottom:8px;
-      font-weight:600;
-    }
-
-    .item h3{
-      margin:0 0 10px;
-      font-size:1.15rem;
-      color:var(--accent);
-      font-weight:600;
-    }
-
-    .item p{
-      margin:0 0 12px;
-      color:var(--text);
-      line-height:1.7;
-      font-size:.95rem;
-    }
-
-    .item p:last-child{margin-bottom:0}
-
-    .item a{
-      position:relative;
-      display:inline-block;
-      color:var(--gold);
-      text-decoration:none;
-      font-weight:500;
-      transition:color .2s;
-    }
-
-    .item a::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-1px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:width .3s ease;
-    }
-
-    .item a:hover::after{
-      width:100%;
-    }
-
-    .thesis{
-      margin-top:16px;
-      padding:16px 16px 16px 20px;
-      background:rgba(201,169,97,.05);
-      border-left:3px solid var(--gold);
-      border-radius:8px;
-      font-size:.9rem;
-    }
-
-    .thesis p{
-      margin:0 0 8px;
-      color:var(--text);
-      line-height:1.65;
-    }
-
-    .thesis p:last-child{margin-bottom:0}
-
-    .thesis strong{
-      color:var(--accent);
-      font-weight:600;
-    }
-
-    .thesis a{
-      position:relative;
-      display:inline-block;
-      color:var(--gold);
-      text-decoration:none;
-      font-weight:500;
-      transition:color .2s;
-    }
-
-    .thesis a::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-1px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:width .3s ease;
-    }
-
-    .thesis a:hover::after{
-      width:100%;
-    }
-
-    /* Courses dropdown (Education tab) */
-    .courses-block{
-      margin-top:28px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      overflow:hidden;
-      background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(250,250,248,.65));
-      transition:border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .courses-block.open{
-      border-color:var(--gold);
-      box-shadow:0 8px 24px rgba(201,169,97,.12);
-    }
-
-    .courses-toggle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      width:100%;
-      background:none;
-      border:0;
-      margin:0;
-      padding:18px 22px;
-      cursor:pointer;
-      font-family:inherit;
-      font-size:1rem;
-      font-weight:600;
-      color:var(--accent);
-      text-align:left;
-      transition:background .25s ease;
-      appearance:none;
-    }
-
-    .courses-toggle:hover{
-      background:rgba(201,169,97,.06);
-    }
-
-    .courses-toggle .course-count{
-      font-weight:500;
-      font-size:.8rem;
-      color:var(--muted);
-      margin-left:10px;
-    }
-
-    .courses-toggle .chevron{
-      color:var(--gold);
-      flex-shrink:0;
-      margin-left:14px;
-      transition:transform .35s ease;
-      display:inline-flex;
-    }
-
-    .courses-block.open .courses-toggle .chevron{
-      transform:rotate(180deg);
-    }
-
-    .courses-panel{
-      position:relative;
-      max-height:116px;
-      overflow:hidden;
-      border-top:1px solid var(--border);
-      transition:max-height .45s ease;
-    }
-
-    .courses-panel::after{
-      content:'';
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      height:54px;
-      background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.92) 60%, var(--panel) 100%);
-      pointer-events:none;
-      opacity:1;
-      transition:opacity .35s ease;
-    }
-
-    .courses-block.open .courses-panel{
-      max-height:560px;
-    }
-
-    .courses-block.open .courses-panel::after{
-      opacity:0;
-    }
-
-    .courses-scroll{
-      max-height:520px;
-      overflow-y:auto;
-      padding:6px 22px 18px;
-    }
-
-    .courses-scroll::-webkit-scrollbar{
-      width:6px;
-    }
-
-    .courses-scroll::-webkit-scrollbar-track{
-      background:transparent;
-    }
-
-    .courses-scroll::-webkit-scrollbar-thumb{
-      background:var(--gold);
-      border-radius:4px;
-    }
-
-    .course-row{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:11px 0;
-      border-bottom:1px solid var(--border);
-    }
-
-    .course-row:last-child{
-      border-bottom:none;
-    }
-
-    .course-row::before{
-      content:'';
-      width:5px;
-      height:5px;
-      border-radius:50%;
-      background:var(--gold);
-      flex-shrink:0;
-    }
-
-    .course-name{
-      font-size:.92rem;
-      font-weight:500;
-      color:var(--text);
-      line-height:1.4;
-    }
-
-    /* Desktop: education column sits alone with room to spare, so keep it
-       open instead of requiring hover (matches the two-column breakpoint below) */
-    @media (min-width: 1201px){
-      .timeline-item.education .timeline-content{
-        max-height:500px;
-        opacity:1;
-      }
-
-      .timeline-item.education{
-        cursor:default;
-      }
-    }
-
-    @media (max-width: 1200px){
-      .dual-timeline-wrapper{
-        grid-template-columns:1fr;
-        gap:32px;
-      }
-    }
-
-    @media (max-width: 920px){
-      .grid{
-        grid-template-columns:1fr;
-        grid-template-rows:auto auto auto;
-        grid-template-areas:
-          "side"
-          "content"
-          "contact";
-      }
-      .side{
-        padding:32px 28px 24px;
-        border-right:0;
-        border-bottom:1px solid var(--border);
-      }
-      .contact{
-        margin-top:0;
-        padding:24px 28px 32px;
-        border-right:0;
-        border-top:1px solid var(--border);
-      }
-      .about,.blocks{grid-template-columns:1fr}
-      .about .portrait{order:1;width:70%;margin:0 auto 18px}
-      .about .lead{order:2}
-      .content{padding:32px 28px}
-      .wrap{padding:28px 16px}
-      
-      .timeline-dot{
-        width:40px;
-        height:40px;
-        font-size:.8rem;
-      }
-      
-      .timeline-item{
-        padding-left:70px;
-      }
-      
-      .timeline-line{
-        left:20px;
-      }
-    }
-
-    /* Scroll-in reveal (placed last so it wins the transition cascade over
-       component-level `transition: .3s ease` shorthand rules like .block/.item) */
-    .reveal{
-      opacity:0;
-      transform:translateY(16px);
-      transition:opacity .55s ease, transform .55s ease;
-    }
-
-    .reveal.in-view{
-      opacity:1;
-      transform:none;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .reveal{opacity:1;transform:none;transition:none}
-    }
-
-    @media print{
-      body{background:#fff}
-      .bg-mesh{display:none}
-      .wrap{max-width:100%;padding:0;margin:0}
-      .card{
-        box-shadow:none;
-        border:none;
-        border-radius:0;
-        opacity:1!important;
-        transform:none!important;
-      }
-      .grid{
-        grid-template-columns:1fr;
-        grid-template-areas:
-          "side"
-          "content"
-          "contact";
-      }
-      .side{
-        border-right:none;
-        border-bottom:1px solid #ccc;
-        padding:0 0 16px;
-      }
-      .nav{display:none}
-      .contact{
-        margin-top:16px;
-        padding:16px 0 0;
-        border-right:none;
-        background:none;
-      }
-      .content{padding:16px 0}
-      .hero{padding:0 0 20px;border-bottom:1px solid #ccc}
-      .section{
-        display:block!important;
-        opacity:1!important;
-        transform:none!important;
-        animation:none!important;
-        page-break-inside:avoid;
-        margin-bottom:28px;
-        padding-bottom:20px;
-        border-bottom:1px solid #ddd;
-      }
-      .section:last-child{border-bottom:none;margin-bottom:0}
-      .timeline-content{
-        max-height:none!important;
-        overflow:visible!important;
-        opacity:1!important;
-        animation:none!important;
-      }
-      .timeline-item{cursor:default}
-      .dual-timeline-wrapper{grid-template-columns:1fr 1fr}
-      .reveal{opacity:1!important;transform:none!important;transition:none!important}
-      a{color:#000!important}
-      a::after{display:none!important}
-      .portrait{filter:none;box-shadow:none}
-      .courses-block{
-        border:none;
-        box-shadow:none!important;
-        background:none;
-      }
-      .courses-toggle{cursor:default;padding:8px 0}
-      .courses-toggle .chevron{display:none}
-      .courses-panel{
-        max-height:none!important;
-        overflow:visible!important;
-        border-top:1px solid #ddd!important;
-      }
-      .courses-panel::after{
-        display:none!important;
-      }
-      .courses-scroll{
-        max-height:none!important;
-        overflow:visible!important;
-        padding:6px 0 0;
-      }
-      .project-carousel-wrap{display:none}
-    }
-  </style>
-  <noscript><style>.card{opacity:1!important;transform:none!important}</style></noscript>
+  <title>Jasper Anttila — Resume</title>
+  <link rel="stylesheet" href="style.css">
+  <noscript><style>.hero,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
-  <div class="bg-mesh"><div class="noise"></div></div>
-  <div class="wrap">
-    <div class="card">
-      <header class="hero">
-        <h1>JASPER ANTTILA</h1>
-        <div class="divider"></div>
-        <p>Master's in Information Systems</p>
-      </header>
+  <nav class="nav" aria-label="Resume sections">
+    <a class="active" href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#creative">Creative</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-      <div class="grid">
-        <aside class="side">
-          <nav class="nav" aria-label="Resume sections">
-            <button class="active" data-target="about">About</button>
-            <button data-target="experience">Experience</button>
-            <button data-target="education">Education</button>
-            <button data-target="skills">Skills</button>
-          </nav>
-        </aside>
+  <main class="sheet">
+    <header class="hero" id="about">
+      <img class="hero-portrait" src="Jasper_Anttila.webp" alt="Portrait of Jasper Anttila">
+      <h1>Jasper Anttila</h1>
+      <p class="hero-role">M.Sc. in Information Systems — <mark>digital services, data &amp; design</mark></p>
+      <p class="hero-lede">I work at the intersection of digital services, data and visual design — pairing a fresh master's degree with the lessons of founding and running a business to nearly €300k in turnover.</p>
+      <ul class="hero-links">
+        <li><a href="mailto:jasper.a.anttila@gmail.com">jasper.a.anttila@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jasper-anttila-210ba91b9/" target="_blank" rel="noreferrer noopener">LinkedIn</a></li>
+        <li><a href="tel:+358405672193">+358 40 567 2193</a></li>
+        <li>Jyväskylä, Finland</li>
+      </ul>
 
-        <main class="content">
-          <section class="section active" id="about">
-            <h2>About</h2>
-            <div class="section-bar"></div>
-            <div class="about">
-              <div class="lead">
-          
-                <p class="reveal">I'm a 27-year-old recent graduate with an M.Sc. in Information Systems from the University of Jyväskylä, where my thesis examined how software developers experience generative AI tools. Before and during my studies, I founded and ran a house painting business that grew to 10+ seasonal employees and nearly €300k in turnover — experience that taught me project management, client acquisition, and leading a team from the ground up.</p>
-                <p class="reveal">I combine that hands-on business background with technical skills in WordPress development, data, and digital services, alongside earlier experience in sales, customer service, and customer acquisition. I'm drawn to work at the intersection of digital services, data, and visual design — where technical thinking meets strong execution.</p>
-                <p class="reveal">Outside of work, I spend time with family and friends, stay active through sports, and enjoy photography and video editing when I get the chance.</p>
-              </div>
-              <img class="portrait reveal" src="Jasper_Anttila.webp" alt="Professional portrait">
-            </div>
-          </section>
-
-          <section class="section" id="experience">
-            <h2>Experience</h2>
-            <div class="section-bar"></div>
-            <div class="dual-timeline-wrapper">
-              <!-- Work Experience Timeline -->
-              <div class="timeline-section work">
-                <h3>Work Experience</h3>
-                <div class="timeline-container">
-                  <div class="timeline-line"></div>
-                  <div class="timeline-items">
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">💻</div>
-                      <div class="timeline-title">Freelancer</div>
-                      <div class="timeline-meta">Self-employed · 2024 - 2026</div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Social Media, Content Creating, Web & Facade Painting Projects</strong></p>
-                          <p class="location">Central Finland, Finland</p>
-                          <p>Social media account hosting and content creation, facade painting projects, WordPress development, and website maintenance alongside university studies and writing the master's thesis.</p>
-                          <p class="skills"><strong>Skills:</strong> Social Media Management, Content Creation, WordPress, Website Maintenance, Facade Painting </p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">🏠</div>
-                      <div class="timeline-title">Entrepreneur / Business Owner</div>
-                      <div class="timeline-meta">Suojaväri Oy · Apr 2017 - Jan 2024 · 6 yrs 10 mos</div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>House Painting & Façade Maintenance</strong></p>
-                          <p class="location">Central Finland, Finland</p>
-                          <p>Founded and grew a house painting business specializing in facade painting (Julkisivumaalaus). Employed approximately 10+ seasonal workers and generated turnover of nearly 300k in summer season 2023. Managed all operations from client acquisition to project delivery. Left the business in good hands to focus on university studies and other freelance projects.</p>
-                          <span class="role"><strong>Full-time :</strong> May 2021 - Jan 2024 </span>
-                          <span class="role"><strong>Self-employed / light entrepreneur:</strong> Apr 2017 - May 2021 </span>
-                          <p class="skills"><strong>Skills:</strong> Marketing, Wordpress developing, Business Planning, Project Management, Organization Skills, Team Leadership </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">📈</div>
-                      <div class="timeline-title">Sales</div>
-                      <div class="timeline-meta">Fonum · Part-time · Aug 2020 - May 2021 · 10 mos</div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Telephone Subscriptions & Maintenance</strong></p>
-                          <p class="location">Central Finland, Finland</p>
-                          <p>Sale of telephone subscriptions and telephone maintenance.</p>
-                          <p class="skills"><strong>Skills:</strong> Sales, Phone Repair</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">📈</div>
-                      <div class="timeline-title">Sales</div>
-                      <div class="timeline-meta">Rakettitukku · Part-time · Dec 2018 - Jan 2020 </div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Point of Sale Manager, New Year's sale</strong></p>
-                          <p>The person in charge of the point of sale.</p>
-                          <p class="skills"><strong>Skills:</strong> Team Management</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">🤝</div>
-                      <div class="timeline-title">Customer Procurer for Sales</div>
-                      <div class="timeline-meta">Koreka Oy · Part-time · Oct 2016 - Apr 2017 </div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Sales Coordination</strong></p>
-                          <p>Arranging sales meetings by phone.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">🖌️</div>
-                      <div class="timeline-title">House Painter</div>
-                      <div class="timeline-meta">Sutiva Oy · Part-time · May 2016 - Jul 2016 </div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Summer Job</strong></p>
-                          <p>Painting houses, summer job.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">🖌️</div>
-                      <div class="timeline-title">House Painter</div>
-                      <div class="timeline-meta">Travaille Oy · Part-time · Jun 2015 - Jul 2015 </div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Summer Job</strong></p>
-                          <p>Outdoor house painting, summer job.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                      <div class="timeline-dot">🧱</div>
-                      <div class="timeline-title">Construction Worker</div>
-                      <div class="timeline-meta">Rakennustoimisto Kalevi Alonen Oy · Part-time · May 2012 - Jul 2014 </div>
-                      <div class="timeline-content">
-                        <div class="timeline-description">
-                          <p><strong>Various Construction Tasks</strong></p>
-                          <p class="location">Central Finland, Finland</p>
-                          <p>Different part-time jobs as construction worker etc.</p>
-                          <p class="skills"><strong>Skills:</strong> Construction</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Education Timeline -->
-              <div class="timeline-section education">
-                <h3>Education</h3>
-                <div class="timeline-container education">
-                  <div class="timeline-line education"></div>
-                  <div class="timeline-items">
-                    <div class="timeline-item education reveal">
-                      <div class="timeline-dot education">📚</div>
-                      <div class="timeline-title education">Master's Degree</div>
-                      <div class="timeline-meta">University of Jyväskylä · Feb 2021 - May 2026</div>
-                      <div class="timeline-content">
-                        <div class="timeline-description education">
-                          <p><strong>B.Sc. &amp; M.Sc. Information Systems (Kauppatieteiden maisteri, pääaineena tietojärjestelmätiede)</strong></p>
-                          <p>Information Systems, Data, Digitalization, Marketing, Finance etc. (see examples of courses in "Education" tab).</p>
-                          <p class="skills"><strong>Field:</strong> Information Systems</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="section" id="education">
-            <h2>Education</h2>
-            <div class="section-bar"></div>
-            <div class="timeline">
-              <div class="item reveal">
-                <div class="meta">2021 — 2026</div>
-                <h3>B.Sc. &amp; M.Sc. Information Systems (Kauppatieteiden maisteri, pääaineena tietojärjestelmätiede)</h3>
-                <p><strong>University of Jyväskylä</strong></p>
-                
-                <div class="thesis reveal">
-                  <p><strong>Bachelor's Thesis:</strong> AI Utilization in Consumer Customer Journey (Grade: 5)</p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">Read thesis →</a></p>
-                </div>
-
-                <div class="thesis reveal">
-                  <p><strong>Master's Thesis:</strong> Software Developers and Generative AI: Job Demands and Resources (Grade: 4)</p>
-                  <p><a href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">Read thesis →</a></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="courses-block reveal" id="coursesBlock">
-              <button class="courses-toggle" id="coursesToggle" aria-expanded="false" aria-controls="coursesPanel">
-                <span>Examples of courses I have taken in Uni</span>
-                <span class="chevron" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-              </button>
-              <div class="courses-panel" id="coursesPanel">
-                <div class="courses-scroll">
-                  <div class="course-row"><span class="course-name">Digital Systems Design, Development and Deployment (DS3D)</span></div>
-                  <div class="course-row"><span class="course-name">IT ja ihmisen käyttäytyminen</span></div>
-                  <div class="course-row"><span class="course-name">Kuluttajakäyttäytyminen digitalisoituvassa ympäristössä</span></div>
-                  <div class="course-row"><span class="course-name">Disruptive Technologies in Digital Business</span></div>
-                  <div class="course-row"><span class="course-name">Johdatus tiedusteluun</span></div>
-                  <div class="course-row"><span class="course-name">Digital Services and Innovation</span></div>
-                  <div class="course-row"><span class="course-name">Data ja sen hallinta</span></div>
-                  <div class="course-row"><span class="course-name">Digitalisaatio ja sen johtaminen</span></div>
-                  <div class="course-row"><span class="course-name">Tilinpäätös- ja verosuunnittelu</span></div>
-                  <div class="course-row"><span class="course-name">Kustannuslaskenta</span></div>
-                  <div class="course-row"><span class="course-name">Kirjanpito ja tuloslaskenta</span></div>
-                  <div class="course-row"><span class="course-name">Johdatus rahoitukseen</span></div>
-                  <div class="course-row"><span class="course-name">Suomen talous ja talouspolitiikka</span></div>
-                  <div class="course-row"><span class="course-name">Asiakassuhde- ja palvelujohtaminen</span></div>
-                  <div class="course-row"><span class="course-name">Kuluttajakäyttäytyminen</span></div>
-                  <div class="course-row"><span class="course-name">Digitaalinen markkinointi</span></div>
-                  <div class="course-row"><span class="course-name">Tilastomenetelmien peruskurssi</span></div>
-                  <div class="course-row"><span class="course-name">Tietokannat ja tiedonhallinta</span></div>
-                  <div class="course-row"><span class="course-name">Tuotekehitysprojekti</span></div>
-                  <div class="course-row"><span class="course-name">Uudet teknologiat yhteiskunnassa</span></div>
-                  <div class="course-row"><span class="course-name">Projektin hallinta</span></div>
-                  <div class="course-row"><span class="course-name">Palvelumuotoiluprojekti</span></div>
-                  <div class="course-row"><span class="course-name">Tietohallinnon perusteet</span></div>
-                  <div class="course-row"><span class="course-name">Ihmisen ja tietokoneen vuorovaikutus</span></div>
-                  <div class="course-row"><span class="course-name">Ohjelmointi 1</span></div>
-                  <div class="course-row"><span class="course-name">Johdatus algoritmiseen ajatteluun</span></div>
-                  <div class="course-row"><span class="course-name">IT-infrastruktuuri ja palveluiden hallinta</span></div>
-                  <div class="course-row"><span class="course-name">Kokonaisarkkitehtuuri käytännössä</span></div>
-                  <div class="course-row"><span class="course-name">Tietoverkot</span></div>
-                  <div class="course-row"><span class="course-name">Johdatus sovelluskehitykseen</span></div>
-                  <div class="course-row"><span class="course-name">Tietojärjestelmien kehittäminen</span></div>
-                  <div class="course-row"><span class="course-name">Yritysjärjestelmät ja niiden arkkitehtuurit</span></div>
-                  <div class="course-row"><span class="course-name">Liiketoimintaosaamisen perusteiden soveltaminen</span></div>
-                  <div class="course-row"><span class="course-name">Laskentatoimen perusteet</span></div>
-                  <div class="course-row"><span class="course-name">Markkinoinnin perusteet</span></div>
-                  <div class="course-row"><span class="course-name">Viestinnän johtamisen perusteet</span></div>
-                  <div class="course-row"><span class="course-name">Johtamisen ja johtajuuden perusteet</span></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="section" id="skills">
-            <h2>Skills</h2>
-            <div class="section-bar"></div>
-            <div class="blocks">
-              <div class="block reveal">
-                <h4>Software Development</h4>
-                <ul>
-                  <li class="reveal">JavaScript / Node.js</li>
-                  <li class="reveal">Python</li>
-                  <li class="reveal">SQL</li>
-                  <li class="reveal">GitHub / Docker</li>
-                </ul>
-              </div>
-              <div class="block reveal">
-                <h4>Research & Creative</h4>
-                <ul>
-                  <li class="reveal">Qualitative Methods</li>
-                  <li class="reveal">Thematic Analysis</li>
-                  <li class="reveal">Photography</li>
-                  <li class="reveal">Video Editing</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="project-showcase reveal">
-              <h4 class="project-showcase-title">Check my latest projects</h4>
-              <p>A few recent projects — swipe or use the arrows to browse.</p>
-<div class="project-carousel-wrap">
-  <button class="carousel-arrow prev" id="carouselPrev" aria-label="Scroll left">‹</button>
-
-  <div class="project-carousel" id="projectCarousel">
-    <div class="project-card">
-      <video class="project-media" autoplay muted loop playsinline preload="metadata">
-        <source src="Keitti%C3%B6visu.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="project-card-body">
-        <h5>Kitchen Renovation Visual</h5>
-        <p>A walkthrough of a recent kitchen renovation project — from concept to the finished space.</p>
+      <div class="about-copy">
+        <p class="reveal">I'm a 27-year-old recent graduate with an M.Sc. in Information Systems from the University of Jyväskylä, where my thesis examined how software developers experience generative AI tools. Before and during my studies, I founded and ran a house painting business that grew to 10+ seasonal employees and nearly €300k in turnover. That experience taught me project management, client acquisition, and leading a team from the ground up.</p>
+        <p class="reveal">I combine that hands-on business background with technical skills and practical experience in web development, visual content editing and creation, alongside earlier experience in sales, customer service, and customer acquisition. I'm drawn to work at the intersection of digital services, data, and visual design — where technical thinking meets execution.</p>
+        <p class="reveal">Outside of work, I spend time with family and friends, stay active through sports, and enjoy photography and video editing when I get the chance.</p>
       </div>
-    </div>
+    </header>
 
-    <div class="project-card">
-      <div class="project-media-grid">
-        <img src="wordpress1.png" alt="High ranking website example 1" class="project-media-thumb">
-        <img src="wordpress2.png" alt="High ranking website example 2" class="project-media-thumb">
+    <section class="section" aria-label="Capabilities">
+      <h2>Capabilities</h2>
+      <div class="cap-row reveal">
+        <h3>Web Development</h3>
+        <p>AI-assisted development · WordPress · Website maintenance</p>
       </div>
-      <div class="project-card-body">
-        <h5>High Ranking Websites</h5>
-        <p>WordPress websites built and optimized to rank highly in search results.</p>
+      <div class="cap-row reveal">
+        <h3>Creative</h3>
+        <p>Content creation · Graphic design · UX/UI design · Photoshop · Illustrator · Photography · Video editing</p>
       </div>
-    </div>
-
-    <div class="project-card">
-      <img src="content.png" alt="Media content creation example" class="project-media">
-      <div class="project-card-body">
-        <h5>Media Content Creation</h5>
-        <p>Social media content creation and account management for business clients.</p>
+      <div class="cap-row reveal">
+        <h3>Business</h3>
+        <p>Project management · Client acquisition · Marketing · Team leadership · Sales</p>
       </div>
-    </div>
-  </div>  <!-- ✅ now closes after all three cards -->
+    </section>
 
-  <button class="carousel-arrow next" id="carouselNext" aria-label="Scroll right">›</button>
-</div>
-            </div>
-          </section>
-        </main>
+    <section class="section" id="experience">
+      <h2>Experience</h2>
 
-        <div class="contact">
-          <h3>Contact</h3>
-          <p>jasper.a.anttila@gmail.com</p>
-          <p>+358 40 567 2193</p>
-          <p>Jyväskylä, Finland</p>
-          <p><a href="https://www.linkedin.com/in/jasper-anttila-210ba91b9/" target="_blank" rel="noreferrer noopener">View my LinkedIn</a></p>
+      <article class="job reveal">
+        <p class="job-when">2024 — 2026</p>
+        <div class="job-what">
+          <h3>Freelancer</h3>
+          <p class="job-org">Self-employed · Central Finland</p>
+          <p>Social media management and content creation, WordPress development and façade painting projects alongside university studies and the master's thesis.</p>
+          <p class="job-tags">Social media · Content creation · WordPress · Website maintenance</p>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <p class="job-when">2017 — 2024</p>
+        <div class="job-what">
+          <h3>Founder &amp; Business Owner</h3>
+          <p class="job-org">Suojaväri Oy — house painting &amp; façade maintenance · Central Finland</p>
+          <p>Founded and grew a façade painting business, managing everything from client acquisition to project delivery. Left the business in good hands to focus on university studies.</p>
+          <p class="job-stats"><strong>10+</strong> seasonal employees · <strong>~€300k</strong> turnover in summer 2023</p>
+          <p class="job-tags">Full-time from 2021 · Light entrepreneur 2017–2021 · Business planning · Project management · Team leadership · Sales</p>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <p class="job-when">2020 — 2021</p>
+        <div class="job-what">
+          <h3>Sales</h3>
+          <p class="job-org">Fonum · Part-time</p>
+          <p>Sale of telephone subscriptions and phone maintenance.</p>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <p class="job-when">2018 — 2020</p>
+        <div class="job-what">
+          <h3>Point of Sale Manager</h3>
+          <p class="job-org">Rakettitukku · Part-time</p>
+          <p>Responsible for the point of sale during the New Year's season.</p>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <p class="job-when">2016 — 2017</p>
+        <div class="job-what">
+          <h3>Customer Procurer</h3>
+          <p class="job-org">Koreka Oy · Part-time</p>
+          <p>Arranged sales meetings by phone.</p>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <p class="job-when">2012 — 2016</p>
+        <div class="job-what">
+          <h3>Earlier roles</h3>
+          <p class="job-org">Sutiva Oy · Travaille Oy · Rakennustoimisto Kalevi Alonen Oy</p>
+          <p>Summer and part-time work as a house painter and construction worker.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="education">
+      <h2>Education</h2>
+
+      <article class="degree reveal">
+        <p class="job-when">2021 — 2026</p>
+        <div class="job-what">
+          <h3>B.Sc. &amp; M.Sc., Information Systems</h3>
+          <p class="job-org">University of Jyväskylä · Kauppatieteiden maisteri, pääaineena tietojärjestelmätiede</p>
+          <p>Information systems, data, digitalization, marketing and finance — see selected courses below.</p>
+
+          <div class="theses">
+            <a class="thesis" href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_92372" target="_blank" rel="noreferrer">
+              <span class="thesis-label">Bachelor's thesis · Grade 5</span>
+              <span class="thesis-title">AI Utilization in Consumer Customer Journey</span>
+              <span class="thesis-cta">Check thesis</span>
+              <span class="thesis-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="thesis" href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_112063" target="_blank" rel="noreferrer">
+              <span class="thesis-label">Master's thesis · Grade 4</span>
+              <span class="thesis-title">Software Developers and Generative AI: Job Demands and Resources</span>
+              <span class="thesis-cta">Check thesis</span>
+              <span class="thesis-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+      <div class="courses-block reveal" id="coursesBlock">
+        <button class="courses-toggle" id="coursesToggle" aria-expanded="false" aria-controls="coursesPanel">
+          <span>Selected university courses</span>
+          <span class="course-count">37</span>
+          <span class="chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <div class="courses-panel" id="coursesPanel">
+          <div class="courses-scroll">
+            <p class="course">Digital Systems Design, Development and Deployment (DS3D)</p>
+            <p class="course">IT ja ihmisen käyttäytyminen</p>
+            <p class="course">Kuluttajakäyttäytyminen digitalisoituvassa ympäristössä</p>
+            <p class="course">Disruptive Technologies in Digital Business</p>
+            <p class="course">Johdatus tiedusteluun</p>
+            <p class="course">Digital Services and Innovation</p>
+            <p class="course">Data ja sen hallinta</p>
+            <p class="course">Digitalisaatio ja sen johtaminen</p>
+            <p class="course">Tilinpäätös- ja verosuunnittelu</p>
+            <p class="course">Kustannuslaskenta</p>
+            <p class="course">Kirjanpito ja tuloslaskenta</p>
+            <p class="course">Johdatus rahoitukseen</p>
+            <p class="course">Suomen talous ja talouspolitiikka</p>
+            <p class="course">Asiakassuhde- ja palvelujohtaminen</p>
+            <p class="course">Kuluttajakäyttäytyminen</p>
+            <p class="course">Digitaalinen markkinointi</p>
+            <p class="course">Tilastomenetelmien peruskurssi</p>
+            <p class="course">Tietokannat ja tiedonhallinta</p>
+            <p class="course">Tuotekehitysprojekti</p>
+            <p class="course">Uudet teknologiat yhteiskunnassa</p>
+            <p class="course">Projektin hallinta</p>
+            <p class="course">Palvelumuotoiluprojekti</p>
+            <p class="course">Tietohallinnon perusteet</p>
+            <p class="course">Ihmisen ja tietokoneen vuorovaikutus</p>
+            <p class="course">Ohjelmointi 1</p>
+            <p class="course">Johdatus algoritmiseen ajatteluun</p>
+            <p class="course">IT-infrastruktuuri ja palveluiden hallinta</p>
+            <p class="course">Kokonaisarkkitehtuuri käytännössä</p>
+            <p class="course">Tietoverkot</p>
+            <p class="course">Johdatus sovelluskehitykseen</p>
+            <p class="course">Tietojärjestelmien kehittäminen</p>
+            <p class="course">Yritysjärjestelmät ja niiden arkkitehtuurit</p>
+            <p class="course">Liiketoimintaosaamisen perusteiden soveltaminen</p>
+            <p class="course">Laskentatoimen perusteet</p>
+            <p class="course">Markkinoinnin perusteet</p>
+            <p class="course">Viestinnän johtamisen perusteet</p>
+            <p class="course">Johtamisen ja johtajuuden perusteet</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <script>
-    // Loading polish: fade + slide the card in once everything is ready.
-    window.addEventListener('load', () => {
-      requestAnimationFrame(() => document.body.classList.add('loaded'));
-    });
+    <section class="section" id="projects">
+      <h2>Selected projects</h2>
+      <p class="section-intro">A few recent projects — swipe or use the arrows to browse.</p>
 
-    // Scroll-in reveal for elements within each section (staggered).
-    const revealEls = document.querySelectorAll('.reveal');
-    revealEls.forEach((el, i) => {
-      el.style.transitionDelay = `${(i % 8) * 60}ms`;
-    });
+      <div class="project-carousel-wrap">
+        <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous project">‹</button>
 
-    if ('IntersectionObserver' in window) {
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: .15 });
+        <div class="project-carousel" id="projectCarousel">
+          <article class="project-card">
+            <video class="project-media" autoplay muted loop playsinline preload="metadata">
+              <source src="Keitti%C3%B6visu.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3>Kitchen Renovation Visualizer</h3>
+            <p>Browser-based sales tool that helps kitchen renovation professionals present realistic visualizations of clients' existing kitchens using materials from the company catalog. Built with JavaScript, n8n workflows, and AI APIs for image generation and automation.</p>
+          </article>
 
-      revealEls.forEach(el => revealObserver.observe(el));
-    } else {
-      // Fallback: just show everything if IntersectionObserver isn't supported.
-      revealEls.forEach(el => el.classList.add('in-view'));
-    }
+          <article class="project-card">
+            <img class="project-media" src="Shift%20planning.png" alt="Shift planning application dashboard">
+            <h3>Custom shift planning application in a few days</h3>
+            <p>Built a functioning app in a few days for gym workforce management using AI-assisted development. The browser app helps gyms manage employee schedules and availability, with separate dashboards for planners on desktop and employees on mobile. Staff can submit monthly availability, while managers create weekly schedules and track staffing. It also includes automated reminders, schedule publishing workflows, and a clean interface for everyday business use.</p>
+          </article>
 
-    // Courses dropdown (Education tab)
-    const coursesBlock = document.getElementById('coursesBlock');
-    const coursesToggle = document.getElementById('coursesToggle');
-    if (coursesBlock && coursesToggle) {
-      coursesToggle.addEventListener('click', () => {
-        const isOpen = coursesBlock.classList.toggle('open');
-        coursesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-    }
+          <article class="project-card">
+            <div class="project-media-grid">
+              <img class="project-media" src="wordpress1.png" alt="High ranking website example 1">
+              <img class="project-media" src="wordpress2.png" alt="High ranking website example 2">
+            </div>
+            <h3>High ranking websites</h3>
+            <p>WordPress websites built and optimized to rank highly in search results. Focused on SEO best practices and user experience. </p>
+          </article>
 
-    // Project carousel (Skills tab) — arrow buttons scroll the swipeable list
-    const projectCarousel = document.getElementById('projectCarousel');
-    const carouselPrev = document.getElementById('carouselPrev');
-    const carouselNext = document.getElementById('carouselNext');
-    if (projectCarousel && carouselPrev && carouselNext) {
-      const scrollByCard = () => {
-        const card = projectCarousel.querySelector('.project-card');
-        const gap = 20;
-        return card ? card.getBoundingClientRect().width + gap : 320;
-      };
-      carouselPrev.addEventListener('click', () => {
-        projectCarousel.scrollBy({ left: -scrollByCard(), behavior: 'smooth' });
-      });
-      carouselNext.addEventListener('click', () => {
-        projectCarousel.scrollBy({ left: scrollByCard(), behavior: 'smooth' });
-      });
-    }
+          <article class="project-card">
+            <img class="project-media" src="content.png" alt="Media content creation example">
+            <h3>Media content creation</h3>
+            <p>Social media content creation and account management for business client. Photographing, editing and producing visual content and publishing it across social media platforms.</p>
+          </article>
+        </div>
 
-    const buttons = document.querySelectorAll('.nav button');
-    const sections = document.querySelectorAll('.section');
+        <button class="carousel-arrow next" id="carouselNext" aria-label="Next project">›</button>
+      </div>
+    </section>
 
-    buttons.forEach(btn => btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
-    }));
+    <section class="section" id="creative">
+      <h2>Bonus: My creative work</h2>
+      <p class="section-intro">A glimpse at the photography, editing and visual content I create for work and personal projects.</p>
 
-    // Timeline items now expand on hover via CSS (see .timeline-item:hover .timeline-content).
-    // On touch devices without hover, tapping still toggles the "active" class as a fallback.
-    document.querySelectorAll('.timeline-item').forEach(item => {
-      item.addEventListener('click', (event) => {
-        if (window.matchMedia('(hover: none)').matches) {
-          const timelineContainer = item.closest('.timeline-container');
-          timelineContainer.querySelectorAll('.timeline-item').forEach(other => {
-            if (other !== item) other.classList.remove('active');
-          });
-          item.classList.toggle('active');
-        }
-      });
-    });
-  </script>
+      <div class="creative-grid">
+        <article class="creative-card reveal">
+          <h3>Video editing</h3>
+          <p>Filming and editing video content for digital channels and client content.</p>
+          <video class="project-media creative-video" id="creativeVideo" autoplay muted playsinline preload="metadata">
+            <source src="Adobe%20Express%20-%20Timeline%202.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-dots" aria-label="Video 1 of 3">
+            <button class="video-dot active" type="button" data-video-index="0" aria-label="Timeline 2, playing"></button>
+            <button class="video-dot" type="button" data-video-index="1" aria-label="Sequence 01, next"></button>
+            <button class="video-dot" type="button" data-video-index="2" aria-label="Referenssi, next"></button>
+          </div>
+        </article>
+
+        <article class="creative-card creative-stills reveal">
+          <h3>Still images and editing</h3>
+          <p>Still images and edited visual work from personal and creative projects.</p>
+          <div class="still-stage" id="stillStage">
+            <img class="project-media still-image" id="stillImage" src="Photo%201.jpg" alt="Photo 1 of 11">
+            <div class="profile-bubbles" id="profileBubbles" aria-label="Five profile photos">
+              <img src="Harri.jpg" alt="Harri">
+              <img src="Johannes.jpg" alt="Johannes">
+              <img src="Mikael.jpg" alt="Mikael">
+              <img src="Minna.jpg" alt="Minna">
+              <img src="Olli.jpg" alt="Olli">
+            </div>
+          </div>
+          <div class="image-dots" id="imageDots" aria-label="Image 1 of 12"></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Get in touch</h2>
+      <p class="contact-lede">I'm currently open to new opportunities in digital services, data and development.</p>
+      <a class="contact-email" href="mailto:jasper.a.anttila@gmail.com">jasper.a.anttila@gmail.com</a>
+      <ul class="contact-meta">
+        <li><a href="tel:+358405672193">+358 40 567 2193</a></li>
+        <li><a href="https://www.linkedin.com/in/jasper-anttila-210ba91b9/" target="_blank" rel="noreferrer noopener">LinkedIn</a></li>
+        <li>Jyväskylä, Finland</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>Jasper Anttila</p>
+      <p>Jyväskylä, Finland · 2026</p>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
