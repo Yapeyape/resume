@@ -3,7 +3,7 @@
   --red:#e5484b;
   --red-deep:#c9373c;
   --accent:#ff6a5f;
-  --sheet:#1f2a32;
+  --sheet:#242729;
   --sheet-2:#28363f;
   --ink:#131a1f;
   --text:#f3f6f8;
@@ -148,6 +148,7 @@ body{
 
 /* ---------- Sheet ---------- */
 .sheet{
+  position:relative;
   max-width:var(--maxw);
   margin:clamp(16px,4.5vw,64px) auto;
   background:var(--sheet);
@@ -156,13 +157,76 @@ body{
   overflow:hidden;
 }
 
+.sheet > :not(.site-background-paths){position:relative;z-index:1}
+
+.site-background-paths{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  color:rgba(255,255,255,.7);
+  opacity:.1;
+  pointer-events:none;
+}
+
 /* ---------- Hero ---------- */
 .hero{
+  position:relative;
+  isolation:isolate;
   padding:calc(var(--sp-9) + 24px) var(--pad-x) var(--sp-8);
   scroll-margin-top:100px;
   opacity:0;
   transform:translateY(10px);
   transition:opacity .8s var(--ease), transform .8s var(--ease);
+}
+
+.hero > :not(.hero-background-paths){position:relative;z-index:1}
+
+.hero-background-paths{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:360px;
+  color:rgba(255,255,255,.7);
+  opacity:.16;
+  pointer-events:none;
+  overflow:visible;
+}
+
+.hero-background-paths path{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.1;
+  stroke-linecap:round;
+  stroke-dasharray:180 900;
+  animation:hero-path-drift 32s linear infinite;
+}
+
+.hero-background-paths path:nth-child(2n){animation-duration:38s;animation-delay:-9s}
+.hero-background-paths path:nth-child(3n){animation-duration:44s;animation-delay:-17s}
+
+@keyframes hero-path-drift{
+  from{stroke-dashoffset:0}
+  to{stroke-dashoffset:-1080}
+}
+
+.site-background-paths path{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.1;
+  stroke-linecap:round;
+  stroke-dasharray:180 900;
+  animation:hero-path-drift 32s linear infinite;
+}
+
+.site-background-paths path:nth-child(2n){animation-duration:38s;animation-delay:-9s}
+.site-background-paths path:nth-child(3n){animation-duration:44s;animation-delay:-17s}
+
+@keyframes hero-path-drift{
+  from{stroke-dashoffset:0}
+  to{stroke-dashoffset:-1080}
 }
 
 body.loaded .hero{opacity:1;transform:none}
@@ -824,6 +888,8 @@ body.loaded .hero{opacity:1;transform:none}
   }
   .video-dot.active{animation:none}
   .hero,.reveal{opacity:1;transform:none}
+  .site-background-paths path{animation:none}
+  .hero-background-paths path{animation:none}
 }
 
 /* ---------- Print ---------- */

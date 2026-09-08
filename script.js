@@ -11,7 +11,7 @@ const designLabClose = document.getElementById('designLabClose');
 const designLabDefaults = {
   headingFont: 'system', bodyFont: 'system', headingSize: 88, headingWeight: 700,
   headingTracking: -0.035, bodySize: 1.0625, accentColor: '#ff6a5f',
-  pageColor: '#e5484b', sheetColor: '#1f2a32', textColor: '#f3f6f8',
+  pageColor: '#e5484b', sheetColor: '#242729', textColor: '#f3f6f8',
   radius: 20, sectionSpace: 72, motionSpeed: 250
 };
 const designFonts = {
