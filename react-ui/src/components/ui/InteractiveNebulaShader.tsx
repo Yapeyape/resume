@@ -90,7 +90,7 @@ export function InteractiveNebulaShader({
             ? vec3(0.05,0.2,0.5) + vec3(4.0,2.0,5.0)*f
             : hasUpcomingReminders
             ? vec3(0.05,0.3,0.1) + vec3(2.0,5.0,1.0)*f
-            : vec3(0.1,0.3,0.4) + vec3(5.0,2.5,3.0)*f;
+            : vec3(0.25,0.05,0.08) + vec3(5.5,1.6,1.4)*f;
 
           col = col * base + smoothstep(2.5, 0.0, rz) * 0.7 * base;
           d += min(rz, 1.0);

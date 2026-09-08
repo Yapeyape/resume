@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { BriefcaseBusiness, FolderKanban, GraduationCap, Mail, Palette, Sparkles } from 'lucide-react'
+import { BriefcaseBusiness, FolderKanban, GraduationCap, Mail, Palette, Sparkles, UserRound } from 'lucide-react'
 import { InteractiveNebulaShader } from '@/components/ui/InteractiveNebulaShader'
 
 const media = (name: string) => `${import.meta.env.BASE_URL}resume-media/${encodeURIComponent(name)}`
@@ -72,6 +72,7 @@ function App() {
           <p className="hero-role">M.Sc. in Information Systems — <mark>digital services, data &amp; design</mark></p>
           <p className="hero-lede">I am interested in working with digital services, data and visual design. I enjoy optimizing and automating processes to make work easier and more efficient. I recently completed my master&apos;s degree and have experience running a business with nearly €300k in turnover.</p>
           <ul className="hero-links"><li><a href="mailto:jasper.a.anttila@gmail.com">jasper.a.anttila@gmail.com</a></li><li><a href="https://www.linkedin.com/in/jasper-anttila-210ba91b9/">LinkedIn</a></li><li><a href="tel:+358405672193">+358 40 567 2193</a></li><li>Jyväskylä, Finland</li></ul>
+          <SectionTitle icon={UserRound}>A little more about me</SectionTitle>
           <div className="about-copy"><p>I&apos;m a 27-year-old recent graduate with an M.Sc. in Information Systems from the University of Jyväskylä, where my thesis examined how software developers experience generative AI tools. Before and during my studies, I founded and ran a house painting business that grew to 10+ seasonal employees and nearly €300k in turnover.</p><p>I combine that hands-on business background with technical skills and practical experience in web development, visual content editing and creation, alongside earlier experience in sales, customer service, and customer acquisition.</p><p>Outside of work, I spend time with family and friends, stay active through sports, love traveling, and enjoy photography and video editing when I get the chance.</p></div>
         </header>
         <section className="resume-section capabilities"><SectionTitle icon={Sparkles}>Capabilities</SectionTitle>{[['Web Development', 'AI-assisted development · WordPress · Website maintenance'], ['Creative', 'Content creation · Graphic design · UX/UI design · Photoshop · Illustrator · Photography · Video editing'], ['Business', 'Project management · Client acquisition · Marketing · Team leadership · Sales']].map(([title, text]) => <div className="cap-row" key={title}><h3>{title}</h3><p>{text}</p></div>)}</section>
