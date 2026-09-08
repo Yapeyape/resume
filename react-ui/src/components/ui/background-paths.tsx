@@ -53,7 +53,7 @@ export function BackgroundPaths({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#242729] text-[#f3f6f8]">
       <div className="background-paths-art pointer-events-none" aria-hidden="true">
-        {[0, 1, 2, 3].map((band) => (
+        {Array.from({ length: 12 }, (_, band) => (
           <div className="background-paths-band" key={band}>
             <div className="absolute inset-0 opacity-[0.14]">
               <FloatingPaths position={1} />
