@@ -19,7 +19,7 @@ export function InteractiveNebulaShader({
   className = "",
 }: InteractiveNebulaShaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const materialRef = useRef<THREE.ShaderMaterial>();
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null);
 
   // Sync props into uniforms
   useEffect(() => {
