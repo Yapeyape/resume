@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import type { ReactNode } from "react"
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -18,8 +19,9 @@ function FloatingPaths({ position }: { position: number }) {
   return (
     <div className="pointer-events-none absolute inset-0">
       <svg
-        className="h-full w-full text-slate-950 dark:text-white"
+        className="h-full w-full text-white"
         viewBox="0 0 696 316"
+        preserveAspectRatio="none"
         fill="none"
         aria-hidden="true"
       >
@@ -47,12 +49,18 @@ function FloatingPaths({ position }: { position: number }) {
   )
 }
 
-export function BackgroundPaths({ children }: { children: React.ReactNode }) {
+export function BackgroundPaths({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#242729] text-[#f3f6f8]">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.14]">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
+      <div className="background-paths-art pointer-events-none" aria-hidden="true">
+        {[0, 1, 2, 3].map((band) => (
+          <div className="background-paths-band" key={band}>
+            <div className="absolute inset-0 opacity-[0.14]">
+              <FloatingPaths position={1} />
+              <FloatingPaths position={-1} />
+            </div>
+          </div>
+        ))}
       </div>
       <div className="relative z-10">{children}</div>
     </div>
