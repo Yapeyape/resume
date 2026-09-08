@@ -13,6 +13,12 @@
   --border-strong:rgba(255,255,255,.18);
 
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --heading-font:var(--font);
+  --body-font:var(--font);
+  --heading-size:var(--fs-display);
+  --heading-weight:700;
+  --heading-tracking:-.035em;
+  --body-size:var(--fs-md);
   --fs-xs:.8125rem;
   --fs-sm:.9375rem;
   --fs-md:1.0625rem;
@@ -37,8 +43,8 @@ html{scroll-behavior:smooth}
 
 body{
   margin:0;
-  font-family:var(--font);
-  font-size:var(--fs-md);
+  font-family:var(--body-font);
+  font-size:var(--body-size);
   line-height:1.6;
   color:var(--text);
   background:
@@ -88,6 +94,54 @@ body{
   transition:color var(--t) var(--ease), background var(--t) var(--ease);
 }
 
+.design-lab-toggle{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:80;
+  padding:10px 14px;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-sm);
+  background:var(--ink);
+  color:var(--text);
+  font:600 var(--fs-xs) var(--body-font);
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
+}
+
+.design-lab{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  z-index:90;
+  display:grid;
+  align-content:start;
+  gap:18px;
+  width:min(360px,calc(100vw - 24px));
+  padding:24px;
+  overflow-y:auto;
+  background:#111516;
+  color:var(--text);
+  box-shadow:-18px 0 40px rgba(0,0,0,.3);
+  transform:translateX(105%);
+  transition:transform .3s var(--ease);
+}
+
+.design-lab.open{transform:none}
+.design-lab-header{display:flex;justify-content:space-between;align-items:start}
+.design-lab-kicker{margin:0 0 4px;color:var(--accent);font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.12em}
+.design-lab h2{margin:0;font-size:1.5rem}
+.design-lab-close{border:0;background:none;color:var(--text);font-size:1.8rem;line-height:1;cursor:pointer}
+.design-lab label{display:grid;gap:8px;color:var(--text-2);font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.08em}
+.design-lab output{justify-self:end;margin-top:-28px;color:var(--text);font-variant-numeric:tabular-nums}
+.design-lab select,.design-lab input[type="range"]{width:100%}
+.design-lab select{padding:10px;background:#1b201f;color:var(--text);border:1px solid var(--border-strong);font:var(--fs-sm) var(--body-font)}
+.design-lab input[type="range"]{accent-color:var(--accent)}
+.design-lab input[type="color"]{width:100%;height:38px;padding:2px;background:#1b201f;border:1px solid var(--border-strong)}
+.design-lab-actions{display:flex;gap:10px;margin-top:8px}
+.design-lab-actions button{flex:1;padding:10px;border:1px solid var(--border-strong);background:transparent;color:var(--text);font:600 var(--fs-xs) var(--body-font);cursor:pointer}
+
 .nav a:hover{color:var(--text)}
 
 .nav a.active{color:#fff;background:rgba(255,255,255,.1)}
@@ -126,10 +180,11 @@ body.loaded .hero{opacity:1;transform:none}
 
 .hero h1{
   margin:0 0 var(--sp-3);
-  font-size:var(--fs-display);
+  font-family:var(--heading-font);
+  font-size:var(--heading-size);
   line-height:1.02;
-  letter-spacing:-.035em;
-  font-weight:700;
+  letter-spacing:var(--heading-tracking);
+  font-weight:var(--heading-weight);
 }
 
 .hero-role{
@@ -197,6 +252,7 @@ body.loaded .hero{opacity:1;transform:none}
 
 .section h2{
   margin:0 0 var(--sp-6);
+  font-family:var(--heading-font);
   font-size:var(--fs-h2);
   font-weight:650;
   letter-spacing:-.025em;

@@ -5,6 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jasper Anttila — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <noscript><style>.hero,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -18,12 +21,80 @@
     <a href="#contact">Contact</a>
   </nav>
 
+  <button class="design-lab-toggle" id="designLabToggle" type="button" aria-expanded="false" aria-controls="designLab">Design Lab</button>
+  <aside class="design-lab" id="designLab" aria-label="Design Lab controls">
+    <div class="design-lab-header">
+      <div>
+        <p class="design-lab-kicker">Live playground</p>
+        <h2>Design Lab</h2>
+      </div>
+      <button class="design-lab-close" id="designLabClose" type="button" aria-label="Close Design Lab">×</button>
+    </div>
+    <label>Heading font
+      <select id="headingFont">
+        <option value="system">System sans</option>
+        <option value="fraunces">Fraunces · expressive serif</option>
+        <option value="space">Space Grotesk · geometric</option>
+        <option value="manrope">Manrope · polished sans</option>
+        <option value="dmSans">DM Sans · quiet sans</option>
+        <option value="plexMono">IBM Plex Mono · technical</option>
+      </select>
+    </label>
+    <label>Body font
+      <select id="bodyFont">
+        <option value="system">System sans</option>
+        <option value="fraunces">Fraunces · expressive serif</option>
+        <option value="space">Space Grotesk · geometric</option>
+        <option value="manrope">Manrope · polished sans</option>
+        <option value="dmSans">DM Sans · quiet sans</option>
+        <option value="plexMono">IBM Plex Mono · technical</option>
+      </select>
+    </label>
+    <label>Heading size <output id="headingSizeValue">88px</output>
+      <input id="headingSize" type="range" min="48" max="132" value="88">
+    </label>
+    <label>Heading weight <output id="headingWeightValue">700</output>
+      <input id="headingWeight" type="range" min="400" max="800" step="50" value="700">
+    </label>
+    <label>Heading tracking <output id="headingTrackingValue">-0.035em</output>
+      <input id="headingTracking" type="range" min="-0.08" max="0.04" step="0.005" value="-0.035">
+    </label>
+    <label>Body size <output id="bodySizeValue">1.0625rem</output>
+      <input id="bodySize" type="range" min="0.9" max="1.25" step="0.0125" value="1.0625">
+    </label>
+    <label>Accent color
+      <input id="accentColor" type="color" value="#ff6a5f">
+    </label>
+    <label>Page color
+      <input id="pageColor" type="color" value="#e5484b">
+    </label>
+    <label>Sheet color
+      <input id="sheetColor" type="color" value="#1f2a32">
+    </label>
+    <label>Text color
+      <input id="textColor" type="color" value="#f3f6f8">
+    </label>
+    <label>Corner radius <output id="radiusValue">20px</output>
+      <input id="radius" type="range" min="0" max="32" value="20">
+    </label>
+    <label>Section spacing <output id="sectionSpaceValue">72px</output>
+      <input id="sectionSpace" type="range" min="36" max="120" value="72">
+    </label>
+    <label>Motion speed <output id="motionSpeedValue">250ms</output>
+      <input id="motionSpeed" type="range" min="0" max="600" step="25" value="250">
+    </label>
+    <div class="design-lab-actions">
+      <button id="copyDesignCss" type="button">Copy CSS</button>
+      <button id="resetDesign" type="button">Reset</button>
+    </div>
+  </aside>
+
   <main class="sheet">
     <header class="hero" id="about">
       <img class="hero-portrait" src="Jasper_Anttila.webp" alt="Portrait of Jasper Anttila">
       <h1>Jasper Anttila</h1>
       <p class="hero-role">M.Sc. in Information Systems — <mark>digital services, data &amp; design</mark></p>
-      <p class="hero-lede">I work at the intersection of digital services, data and visual design — pairing a fresh master's degree with the lessons of founding and running a business to nearly €300k in turnover.</p>
+      <p class="hero-lede">I am interested in working with digital services, data and visual design. I enjoy optimizing and automating processes to make work easier and more efficient. I recently completed my master's degree and have experience running a business with nearly €300k in turnover.</p>
       <ul class="hero-links">
         <li><a href="mailto:jasper.a.anttila@gmail.com">jasper.a.anttila@gmail.com</a></li>
         <li><a href="https://www.linkedin.com/in/jasper-anttila-210ba91b9/" target="_blank" rel="noreferrer noopener">LinkedIn</a></li>
@@ -33,7 +104,7 @@
 
       <div class="about-copy">
         <p class="reveal">I'm a 27-year-old recent graduate with an M.Sc. in Information Systems from the University of Jyväskylä, where my thesis examined how software developers experience generative AI tools. Before and during my studies, I founded and ran a house painting business that grew to 10+ seasonal employees and nearly €300k in turnover. That experience taught me project management, client acquisition, and leading a team from the ground up.</p>
-        <p class="reveal">I combine that hands-on business background with technical skills and practical experience in web development, visual content editing and creation, alongside earlier experience in sales, customer service, and customer acquisition. I'm drawn to work at the intersection of digital services, data, and visual design — where technical thinking meets execution.</p>
+        <p class="reveal">I combine that hands-on business background with technical skills and practical experience in web development, visual content editing and creation, alongside earlier experience in sales, customer service, and customer acquisition. I'm drawn to work at the intersection of digital services, data, and visual design - where technical thinking meets execution.</p>
         <p class="reveal">Outside of work, I spend time with family and friends, stay active through sports, and enjoy photography and video editing when I get the chance.</p>
       </div>
     </header>

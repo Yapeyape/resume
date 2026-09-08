@@ -5,6 +5,85 @@ window.addEventListener('load', () => {
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const designLab = document.getElementById('designLab');
+const designLabToggle = document.getElementById('designLabToggle');
+const designLabClose = document.getElementById('designLabClose');
+const designLabDefaults = {
+  headingFont: 'system', bodyFont: 'system', headingSize: 88, headingWeight: 700,
+  headingTracking: -0.035, bodySize: 1.0625, accentColor: '#ff6a5f',
+  pageColor: '#e5484b', sheetColor: '#1f2a32', textColor: '#f3f6f8',
+  radius: 20, sectionSpace: 72, motionSpeed: 250
+};
+const designFonts = {
+  system: 'var(--font)',
+  fraunces: '"Fraunces", Georgia, serif',
+  space: '"Space Grotesk", sans-serif',
+  manrope: '"Manrope", sans-serif',
+  dmSans: '"DM Sans", sans-serif',
+  plexMono: '"IBM Plex Mono", monospace'
+};
+const setDesignValue = (name, value) => document.documentElement.style.setProperty(name, value);
+const updateDesignLab = () => {
+  const headingFont = document.getElementById('headingFont').value;
+  const bodyFont = document.getElementById('bodyFont').value;
+  const headingSize = document.getElementById('headingSize').value;
+  const headingWeight = document.getElementById('headingWeight').value;
+  const headingTracking = document.getElementById('headingTracking').value;
+  const bodySize = document.getElementById('bodySize').value;
+  const accentColor = document.getElementById('accentColor').value;
+  const pageColor = document.getElementById('pageColor').value;
+  const sheetColor = document.getElementById('sheetColor').value;
+  const textColor = document.getElementById('textColor').value;
+  const radius = document.getElementById('radius').value;
+  const sectionSpace = document.getElementById('sectionSpace').value;
+  const motionSpeed = document.getElementById('motionSpeed').value;
+  setDesignValue('--heading-font', designFonts[headingFont]);
+  setDesignValue('--body-font', designFonts[bodyFont]);
+  setDesignValue('--heading-size', `${headingSize}px`);
+  setDesignValue('--heading-weight', headingWeight);
+  setDesignValue('--heading-tracking', `${headingTracking}em`);
+  setDesignValue('--body-size', `${bodySize}rem`);
+  setDesignValue('--accent', accentColor);
+  setDesignValue('--red', pageColor);
+  setDesignValue('--sheet', sheetColor);
+  setDesignValue('--text', textColor);
+  setDesignValue('--radius', `${radius}px`);
+  setDesignValue('--radius-sm', `${Math.min(12, radius)}px`);
+  setDesignValue('--sp-8', `${sectionSpace}px`);
+  setDesignValue('--t', `${motionSpeed}ms`);
+  document.getElementById('headingSizeValue').textContent = `${headingSize}px`;
+  document.getElementById('headingWeightValue').textContent = headingWeight;
+  document.getElementById('headingTrackingValue').textContent = `${headingTracking}em`;
+  document.getElementById('bodySizeValue').textContent = `${bodySize}rem`;
+  document.getElementById('radiusValue').textContent = `${radius}px`;
+  document.getElementById('sectionSpaceValue').textContent = `${sectionSpace}px`;
+  document.getElementById('motionSpeedValue').textContent = `${motionSpeed}ms`;
+};
+const resetDesignLab = () => {
+  Object.entries(designLabDefaults).forEach(([id, value]) => {
+    const control = document.getElementById(id);
+    if (control) control.value = value;
+  });
+  updateDesignLab();
+};
+if (designLab && designLabToggle) {
+  const setLabOpen = isOpen => {
+    designLab.classList.toggle('open', isOpen);
+    designLabToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  };
+  designLabToggle.addEventListener('click', () => setLabOpen(!designLab.classList.contains('open')));
+  designLabClose.addEventListener('click', () => setLabOpen(false));
+  designLab.querySelectorAll('select,input').forEach(control => control.addEventListener('input', updateDesignLab));
+  document.getElementById('resetDesign').addEventListener('click', resetDesignLab);
+  document.getElementById('copyDesignCss').addEventListener('click', async event => {
+    const css = `:root { --heading-font: ${getComputedStyle(document.documentElement).getPropertyValue('--heading-font')}; --body-font: ${getComputedStyle(document.documentElement).getPropertyValue('--body-font')}; --heading-size: ${getComputedStyle(document.documentElement).getPropertyValue('--heading-size')}; --heading-weight: ${getComputedStyle(document.documentElement).getPropertyValue('--heading-weight')}; --heading-tracking: ${getComputedStyle(document.documentElement).getPropertyValue('--heading-tracking')}; --body-size: ${getComputedStyle(document.documentElement).getPropertyValue('--body-size')}; --accent: ${getComputedStyle(document.documentElement).getPropertyValue('--accent')}; --red: ${getComputedStyle(document.documentElement).getPropertyValue('--red')}; --sheet: ${getComputedStyle(document.documentElement).getPropertyValue('--sheet')}; --text: ${getComputedStyle(document.documentElement).getPropertyValue('--text')}; --radius: ${getComputedStyle(document.documentElement).getPropertyValue('--radius')}; --sp-8: ${getComputedStyle(document.documentElement).getPropertyValue('--sp-8')}; --t: ${getComputedStyle(document.documentElement).getPropertyValue('--t')}; }`;
+    await navigator.clipboard.writeText(css);
+    event.currentTarget.textContent = 'Copied';
+    setTimeout(() => { event.currentTarget.textContent = 'Copy CSS'; }, 1200);
+  });
+  updateDesignLab();
+}
+
 // Play the creative videos sequentially in the same player.
 const creativeVideo = document.getElementById('creativeVideo');
 const creativeDots = document.querySelectorAll('.video-dot');
