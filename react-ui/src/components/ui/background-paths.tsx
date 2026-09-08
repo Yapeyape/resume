@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
 
 function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+  const paths = Array.from({ length: 18 }, (_, i) => ({
     id: i,
     d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
       380 - i * 5 * position
@@ -49,17 +50,39 @@ function FloatingPaths({ position }: { position: number }) {
   )
 }
 
+// Only animates while scrolled near the viewport so most of the page's bands stay idle.
+function Band() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      rootMargin: "600px 0px",
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="background-paths-band" ref={ref}>
+      {visible && (
+        <div className="absolute inset-0 opacity-[0.14]">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function BackgroundPaths({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#242729] text-[#f3f6f8]">
       <div className="background-paths-art pointer-events-none" aria-hidden="true">
         {Array.from({ length: 12 }, (_, band) => (
-          <div className="background-paths-band" key={band}>
-            <div className="absolute inset-0 opacity-[0.14]">
-              <FloatingPaths position={1} />
-              <FloatingPaths position={-1} />
-            </div>
-          </div>
+          <Band key={band} />
         ))}
       </div>
       <div className="relative z-10">{children}</div>
