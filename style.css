@@ -196,7 +196,7 @@ body{
 }
 
 .hero-background-paths path{
-  fill:none;
+  fill:none !important;
   stroke:currentColor;
   stroke-width:1.1;
   stroke-linecap:round;
@@ -213,7 +213,7 @@ body{
 }
 
 .site-background-paths path{
-  fill:none;
+  fill:none !important;
   stroke:currentColor;
   stroke-width:1.1;
   stroke-linecap:round;
