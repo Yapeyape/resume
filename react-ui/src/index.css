@@ -6,6 +6,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;min-width:320px}
 a{color:inherit}
+.section-title{display:flex;align-items:center;gap:.65rem}.section-title svg{width:1em;height:1em;color:var(--accent);stroke-width:1.5}
 .background-paths-art{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:.9}
 .background-paths-band{position:relative;height:800px;overflow:hidden}
 .resume-nav{position:fixed;top:16px;left:50%;z-index:30;display:flex;gap:2px;padding:6px;transform:translateX(-50%);border:1px solid var(--border);border-radius:999px;background:rgba(18,24,29,.76);backdrop-filter:blur(18px);box-shadow:0 12px 32px rgba(0,0,0,.3);max-width:calc(100vw - 24px);overflow:auto}
