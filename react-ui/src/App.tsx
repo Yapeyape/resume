@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { BriefcaseBusiness, FolderKanban, GraduationCap, Mail, Palette, Sparkles } from 'lucide-react'
-import { BackgroundPaths } from '@/components/ui/background-paths'
+import { InteractiveNebulaShader } from '@/components/ui/InteractiveNebulaShader'
 
 const media = (name: string) => `${import.meta.env.BASE_URL}resume-media/${encodeURIComponent(name)}`
 const videos = ['Adobe Express - Timeline 2.mp4', 'Sequence 01.mp4', 'referenssi.mp4']
@@ -59,7 +59,9 @@ function App() {
   }, [])
 
   return (
-    <BackgroundPaths>
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#242729] text-[#f3f6f8]">
+      <InteractiveNebulaShader />
+      <div className="relative z-10">
       <nav className="resume-nav" aria-label="Resume sections">
         {['about', 'experience', 'projects', 'creative', 'education', 'contact'].map((id) => <a key={id} href={`#${id}`}>{id[0].toUpperCase() + id.slice(1)}</a>)}
       </nav>
@@ -80,7 +82,8 @@ function App() {
         <section className="resume-section contact" id="contact"><SectionTitle icon={Mail}>Get in touch</SectionTitle><p>I&apos;m currently open to new opportunities in digital services, data and development.</p><a className="contact-email" href="mailto:jasper.a.anttila@gmail.com">jasper.a.anttila@gmail.com</a><p>+358 40 567 2193 · LinkedIn · Jyväskylä, Finland</p></section>
         <footer className="footer"><span>Jasper Anttila</span><span>Jyväskylä, Finland · 2026</span></footer>
       </main>
-    </BackgroundPaths>
+      </div>
+    </div>
   )
 }
 
